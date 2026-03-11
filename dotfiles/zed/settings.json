@@ -1,0 +1,179 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "tab_size": 2,
+  "autosave": "on_focus_change",
+  "language_models": {
+    "openai_compatible": {
+      "z.ai": {
+        "api_url": "https://api.z.ai/api/coding/paas/v4/",
+        "available_models": [
+          {
+            "name": "glm-4.6",
+            "display_name": null,
+            "max_tokens": 200000,
+            "max_output_tokens": 32000,
+            "max_completion_tokens": 200000,
+            "capabilities": {
+              "tools": true,
+              "images": true,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false
+            }
+          }
+        ]
+      }
+    }
+  },
+  "agent": {
+    "play_sound_when_agent_done": true,
+    "default_profile": "ask",
+    "default_model": {
+      "provider": "google",
+      "model": "gemini-2.5-flash"
+    }
+  },
+  "agent_servers": {
+    "your_agent_1": {
+      "command": "path_to_executable",
+      "args": [],
+      "env": {}
+    },
+    "qwen-code": {
+      "command": "path_to_executable",
+      "args": [],
+      "env": {}
+    }
+  },
+  "context_servers": {
+    "mcp-server-vercel": {
+      "source": "extension",
+      "enabled": true,
+      "settings": {
+        "url": "https://your-mcp-server.vercel.app/api/mcp"
+      }
+    },
+    "mcp-server-supabase": {
+      "source": "extension",
+      "enabled": false,
+      "settings": {
+        "supabase_access_token": "YOUR_TOKEN",
+        "read_only": false
+      }
+    },
+    "mcp-server-context7": {
+      "source": "extension",
+      "enabled": true,
+      "settings": {
+        "default_minimum_tokens": "10000"
+      }
+    },
+    // "context7": {
+    //   "command": "npx",
+    //   "args": [
+    //     "-y",
+    //     "@upstash/context7-mcp"
+    //   ],
+    //   "env": {
+    //     "DEFAULT_MINIMUM_TOKENS": "6000"
+    //   },
+    //   "alwaysAllow": [
+    //     "resolve-library-id",
+    //     "get-library-docs"
+    //   ]
+    // },
+    "Framelink Figma MCP": {
+      "source": "custom",
+      "command": "npx",
+      "args": [
+        "-y",
+        "figma-developer-mcp",
+        "--figma-api-key=figd_3ScjxLTkEwFF4SBoLNUPsLUXm96wx3gTIPGkYoNu",
+        "--stdio"
+      ],
+      "alwaysAllow": ["get_figma_data", "download_figma_images"]
+    },
+    "shadcn": {
+      "source": "custom",
+      "command": "npx",
+      "args": ["shadcn@latest", "mcp"]
+    },
+    "nx-mcp": {
+      "source": "custom",
+      "command": "npx",
+      "args": ["nx-mcp@latest"]
+    },
+    "sequential-thinking": {
+      "source": "custom",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    },
+    "claude-context": {
+      "source": "custom",
+      "command": "npx",
+      "args": ["@zilliz/claude-context-mcp@latest"],
+      "env": {
+        "OPENAI_API_KEY": "your-openai-api-key",
+        "MILVUS_ADDRESS": "your-zilliz-cloud-public-endpoint",
+        "MILVUS_TOKEN": "your-zilliz-cloud-api-key"
+      }
+    },
+    "linear": {
+      "source": "custom",
+      "command": "npx",
+      "args": ["-y", "@tacticlaunch/mcp-linear"],
+      "env": {
+        "LINEAR_API_TOKEN": "<YOUR_TOKEN>"
+      }
+    }
+  },
+  "icon_theme": "VSCode Icons for Zed (Dark)",
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "theme": {
+    "mode": "system",
+    "light": "Gruvbox Dark Hard",
+    "dark": "One Dark"
+  },
+  "languages": {
+    "Nix": {
+      "language_servers": ["nixd", "!nil"],
+      "formatter": {
+        "external": {
+          "command": "alejandra", // or "nixfmt"
+          "arguments": ["--quiet", "--"]
+        }
+      }
+    }
+  },
+  "lsp": {
+    "tailwindcss-language-server": {
+      "settings": {
+        "classFunctions": ["cva", "cx"],
+        "experimental": {
+          "classRegex": ["[cls|className]\\s\\:\\=\\s\"([^\"]*)"]
+        }
+      }
+    },
+    "vue": {
+      "initialization_options": {
+        "typescript": {
+          "tsdk": ".yarn/sdks/typescript/lib"
+        }
+      }
+    },
+    "nixd": {
+      "settings": {
+        "diagnostic": {
+          "suppress": ["sema-extra-with"]
+        }
+      }
+    }
+  }
+}

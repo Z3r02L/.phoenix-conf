@@ -1,0 +1,37 @@
+# Configuration for starship prompt
+
+# Set the default prompt format
+format = "$all"
+
+# Configure the line break
+add_newline = true
+
+# Configure specific modules
+[character]
+success_symbol = "[→](bold green)"
+error_symbol = "[→](bold red)"
+
+[git_branch]
+symbol = "🌱 "
+format = "[$symbol$branch]($style) "
+
+[username]
+format = "[$user]($style)@"
+show_always = true
+
+[hostname]
+format = "[$hostname]($style):"
+ssh_only = false
+
+[directory]
+format = "[$path]($style)[$read_only]($read_only_style) "
+
+[cmd_duration]
+format = " [$duration]($style)"
+
+[git_status]
+format = "([⁝ $all_status$ahead_behind]($style))"
+
+# Disable the package module, too verbose
+[package]
+disabled = true

@@ -1,0 +1,6 @@
+/* Custom GTK 4 CSS styling */
+
+/* Make sure to import the main theme */
+@import url("/nix/store/*-gruvbox-gtk-theme/share/themes/Gruvbox-Green-Dark-Medium/gtk-4.0/gtk.css");
+
+/* Add any custom styles here */
