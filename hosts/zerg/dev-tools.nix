@@ -24,7 +24,7 @@ in
 
     # JavaScript
     nodejs_24 bun pnpm
-    nodePackages.typescript-language-server
+    typescript-language-server
     biome
 
 

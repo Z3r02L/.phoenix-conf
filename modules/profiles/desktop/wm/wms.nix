@@ -2,6 +2,7 @@
   imports = [
     ./niri.nix
     ./hyprland.nix
+    ../llm.nix
   ];
 
   config = {
@@ -37,31 +38,9 @@
       tmux
       alacritty kitty
       zsh fish nushell
-      zed-editor-fhs vscode-fhs antigravity-fhs # antigravity-fhs
+      zed-editor-fhs vscode-fhs antigravity-fhs
 
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.eca # plugin for any editor
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.forge
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.nanocoder
-
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.omp # opencode multi-agent
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode
-
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.cc-sdd
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.openspec
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.openskills
-
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.code # codex opencode-source fork any provider
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code-router # claude code with any provider
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.vibe-kanban # vibe-kanban
-
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.qwen-code # ?
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.gemini-cli # ?
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.kilocode-cli # ?
-
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.rtk # token consumption by 60-90% on common dev commands
-
-      # inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.zeroclaw # best openclaw (on rust)
-      # ... other tools
+      # LLM-инструменты перенесены в ../llm.nix
 
     ];
   };

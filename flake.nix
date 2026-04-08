@@ -58,6 +58,12 @@
      
     llm-agents.url = "github:numtide/llm-agents.nix";
     # nix-ai-tools.url = "github:numtide/nix-ai-tools";
+
+    # Secrets management
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
     
 
@@ -82,10 +88,10 @@
               inputs.mangowm.nixosModules.mango
             ];
           };
-          nixConfig = {
-            extra-substituters = [ "https://cache.numtide.com" ];
-            extra-trusted-public-keys = [ "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" ];
-          };
+        };
+        nixConfig = {
+          extra-substituters = [ "https://cache.numtide.com" ];
+          extra-trusted-public-keys = [ "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" ];
         };
       };
       # описание машин и пользователей внутри flake-parts.modules, см. ниже
