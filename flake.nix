@@ -55,7 +55,7 @@
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-     
+
     llm-agents.url = "github:numtide/llm-agents.nix";
     # nix-ai-tools.url = "github:numtide/nix-ai-tools";
 
@@ -64,10 +64,13 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Software
+    zapret-discord-youtube.url = "github:kartavkun/zapret-discord-youtube";
   };
     
 
-  outputs = inputs@{ self, nixpkgs, home-manager, wrappers, flake-parts, import-tree, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, wrappers, flake-parts, import-tree, zapret-discord-youtube, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         (import-tree ./modules/nixos)
@@ -89,10 +92,10 @@
             ];
           };
         };
-        nixConfig = {
-          extra-substituters = [ "https://cache.numtide.com" ];
-          extra-trusted-public-keys = [ "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" ];
-        };
+        # nixConfig = {
+        #   extra-substituters = [ "https://cache.numtide.com" ];
+        #   extra-trusted-public-keys = [ "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" ];
+        # };
       };
       # описание машин и пользователей внутри flake-parts.modules, см. ниже
     };

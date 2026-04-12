@@ -30,9 +30,8 @@
       # Additional packages for Wayland support
       xdg-utils
       xdg-desktop-portal
-      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gnome
 
-      vesktop
       telegram-desktop
 
       tmux

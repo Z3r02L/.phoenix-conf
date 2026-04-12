@@ -60,6 +60,7 @@
       amnezia-vpn v2rayn
       zapret
       cloudflare-warp
+      cloudflared
       
       # Media
       qbittorrent syncthing

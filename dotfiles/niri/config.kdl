@@ -120,6 +120,10 @@ layout {
 // spawn "noctalia-shell"
 spawn-at-startup "noctalia-shell"
 
+// Важно для работы порталов (GNOME screencast и т.д.) внутри niri
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP=niri"
+spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
