@@ -16,10 +16,14 @@
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/e8479d40-2038-4c25-aa80-8b178313b8b2";
       fsType = "btrfs";
-      options = [ "subvol=@root" ];
+      options = [ "subvol=@root" "compress=zstd:1" "noatime" "ssd" "discard=async" "commit=120" ];
     };
 
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/90ae5ce4-dd6e-44d2-8af8-0432173ef710";
+  boot.initrd.luks.devices."cryptroot" = {
+    device = "/dev/disk/by-uuid/90ae5ce4-dd6e-44d2-8af8-0432173ef710";
+    allowDiscards = true;
+    bypassWorkqueues = true;
+  };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/AF63-07CA";
@@ -30,61 +34,61 @@
   fileSystems."/games" =
     { device = "/dev/disk/by-uuid/e8479d40-2038-4c25-aa80-8b178313b8b2";
       fsType = "btrfs";
-      options = [ "subvol=@games" ];
+      options = [ "subvol=@games" "compress=zstd:1" "noatime" "ssd" "discard=async" "commit=120" ];
     };
 
   fileSystems."/home" =
     { device = "/dev/disk/by-uuid/e8479d40-2038-4c25-aa80-8b178313b8b2";
       fsType = "btrfs";
-      options = [ "subvol=@home" ];
+      options = [ "subvol=@home" "compress=zstd:1" "noatime" "ssd" "discard=async" "commit=120" ];
     };
 
   fileSystems."/nix" =
     { device = "/dev/disk/by-uuid/e8479d40-2038-4c25-aa80-8b178313b8b2";
       fsType = "btrfs";
-      options = [ "subvol=@nix" ];
+      options = [ "subvol=@nix" "compress=zstd:1" "noatime" "ssd" "discard=async" "commit=120" ];
     };
 
   fileSystems."/persist" =
     { device = "/dev/disk/by-uuid/e8479d40-2038-4c25-aa80-8b178313b8b2";
       fsType = "btrfs";
-      options = [ "subvol=@persist" ];
+      options = [ "subvol=@persist" "compress=zstd:1" "noatime" "ssd" "discard=async" "commit=120" ];
     };
 
   fileSystems."/snapshots" =
     { device = "/dev/disk/by-uuid/e8479d40-2038-4c25-aa80-8b178313b8b2";
       fsType = "btrfs";
-      options = [ "subvol=@snapshots" ];
+      options = [ "subvol=@snapshots" "compress=zstd:1" "noatime" "ssd" "discard=async" "commit=120" ];
     };
 
   fileSystems."/var/cache" =
     { device = "/dev/disk/by-uuid/e8479d40-2038-4c25-aa80-8b178313b8b2";
       fsType = "btrfs";
-      options = [ "subvol=@cache" ];
+      options = [ "subvol=@cache" "compress=zstd:1" "noatime" "ssd" "discard=async" "commit=120" ];
     };
 
   fileSystems."/var/lib/db" =
     { device = "/dev/disk/by-uuid/e8479d40-2038-4c25-aa80-8b178313b8b2";
       fsType = "btrfs";
-      options = [ "subvol=@db" ];
+      options = [ "subvol=@db" "nodatacow" "noatime" "ssd" "discard=async" "commit=120" ];
     };
 
   fileSystems."/var/lib/docker" =
     { device = "/dev/disk/by-uuid/e8479d40-2038-4c25-aa80-8b178313b8b2";
       fsType = "btrfs";
-      options = [ "subvol=@docker" ];
+      options = [ "subvol=@docker" "nodatacow" "noatime" "ssd" "discard=async" "commit=120" ];
     };
 
   fileSystems."/var/log" =
     { device = "/dev/disk/by-uuid/e8479d40-2038-4c25-aa80-8b178313b8b2";
       fsType = "btrfs";
-      options = [ "subvol=@log" ];
+      options = [ "subvol=@log" "compress=zstd:1" "noatime" "ssd" "discard=async" "commit=120" ];
     };
 
   fileSystems."/var/tmp" =
     { device = "/dev/disk/by-uuid/e8479d40-2038-4c25-aa80-8b178313b8b2";
       fsType = "btrfs";
-      options = [ "subvol=@tmp" ];
+      options = [ "subvol=@tmp" "compress=zstd:1" "noatime" "ssd" "discard=async" "commit=120" ];
     };
 
   swapDevices = [ ];

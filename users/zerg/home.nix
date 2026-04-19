@@ -24,14 +24,14 @@ in
 
   home.packages = with pkgs; [
       # Shells
-      fish nushell zsh
-      starship direnv devenv
+      starship nushell zsh
+      direnv devenv
 
       # Terminal utilities
       tmux btop
       yazi pcmanfm file-roller
       microfetch fastfetch
-      file eza zoxide bat fd ripgrep-all fzf
+      file eza bat fd ripgrep-all fzf
       killall zip unzip jq rsync tree
       trash-cli tldr
       ydotool
@@ -111,14 +111,6 @@ in
 #     scripts = [ pkgs.mpvScripts.mpris ];
 #   };
 
-  # Синхронизация конфигов из директории dotfiles
-  # Используется умная функция smartLinkFile (зависит от переменной isDev в начале файла)
-  xdg.configFile."niri/config.kdl".source = smartLinkFile "niri/config.kdl";
-  
-  xdg.configFile."mango".source = smartLink "mango";
-  xdg.configFile."noctalia".source = smartLink "noctalia";
-  xdg.configFile."starship.toml".source = smartLinkFile "starship/starship.toml";
-
   # GTK Icon Theme configuration
   gtk = {
     enable = true;
@@ -128,21 +120,62 @@ in
     };
   };
 
-  programs.fuzzel = {
+  programs.kitty.enable = true;
+  programs.fuzzel.enable = true;
+
+  programs.fish = {
     enable = true;
-    settings = {
-      main = {
-        icon-theme = "Papirus-Dark";
-        include = "~/.config/fuzzel/themes/noctalia";
-        width = 45;
-        lines = 10;
-        # font = "JetBrainsMono Nerd Font Mono:size=14"; # Managed by Stylix
-        horizontal-pad = 25;
-        vertical-pad = 15;
-        inner-pad = 10;
-        border-width = 2;
-        border-radius = lib.mkForce 12;
-      };
+    interactiveShellInit = ''
+      set fish_greeting
+      fish_vi_key_bindings
+      starship init fish | source
+    '';
+    shellAbbrs = {
+      ".." = "cd ..";
+      "..." = "cd ../..";
+      "...." = "cd ../../..";
+      "....." = "cd ../../../..";
+      g = "git";
+      gs = "git status";
+      ga = "git add";
+      gc = "git commit -m";
+      gp = "git push";
+      gl = "git log --graph --oneline --all";
+      gcl = "git clone";
+      gd = "git diff";
+      nrs = "nh os switch .";
+      nrb = "nh os boot .";
+      nfu = "nix flake update";
+      ncg = "nix-collect-garbage -d";
+      ns = "nix-shell -p";
+      ls = "eza --icons --group-directories-first";
+      ll = "eza -l --icons --group-directories-first --git";
+      lt = "eza --tree --icons --group-directories-first";
+      cat = "bat";
+      grep = "rg";
+      top = "btop";
+      v = "nvim";
+      zed = "zeditor";
     };
+  };
+
+  # programs.starship = {
+  #   enable = true;
+  #   enableFishIntegration = true;
+  # };
+
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
+  # Синхронизация конфигов из директории dotfiles (Live-editing через smartLink)
+  xdg.configFile = {
+    "niri/config.kdl".source = smartLinkFile "niri/config.kdl";
+    "mango".source = smartLink "mango";
+    "noctalia".source = smartLink "noctalia";
+    "starship.toml".source = smartLinkFile "starship/starship.toml";
+    "kitty/kitty.conf".source = lib.mkForce (smartLinkFile "kitty/kitty.conf");
+    "fuzzel/fuzzel.ini".source = lib.mkForce (smartLinkFile "fuzzel/fuzzel.ini");
   };
 }

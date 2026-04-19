@@ -1,78 +1,57 @@
-# Configuration for starship prompt (Ultra Functional Gruvbox)
+# Premium Web/Backend Developer Starship Configuration
+# Theme: Noctalia Dark (Vibrant & Informative)
+scan_timeout = 150
 
-# format = Two-line layout for maximum command space
 format = """
-[░▒▓](#7c6f64)\
-[  ](bg:#7c6f64 fg:#ebdbb2)\
-[](fg:#7c6f64 bg:#3c3836)\
+$os\
+$username\
+$hostname\
 $directory\
-[](fg:#3c3836 bg:#504945)\
 $git_branch\
 $git_status\
-[](fg:#504945 bg:#d65d0e)\
+$git_state\
+$git_metrics\
 $nix_shell\
+$package\
 $container\
-[](fg:#d65d0e bg:#665c54)\
-$python\
-$rust\
-$nodejs\
-$golang\
-$php\
-$java\
-$elixir\
-$c\
-[](fg:#665c54 bg:#bdae93)\
 $docker_context\
-$kubernetes\
-[](fg:#bdae93 bg:#a89984)\
-$cmd_duration\
-[](fg:#a89984)\
 $line_break\
-$character\
-"""
+$character"""
 
-# Right-side prompt info
-right_format = """
-$memory\
-$battery\
-$status\
-$time\
-"""
+right_format = """$python$nodejs$golang$rust$php$java$c$lua$cmd_duration$status$time"""
 
 add_newline = true
 
+# --- Core Elements ---
+
 [character]
-success_symbol = "[󰄬 ](bold green)"
-error_symbol = "[󰅖 ](bold red)"
-vimcmd_symbol = "[󰄬 ](bold yellow)"
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold yellow)"
+
+[os]
+disabled = false
+style = "bold white"
 
 [directory]
-style = "bg:#3c3836 fg:#ebdbb2"
-format = "[ $path ]($style)"
 truncation_length = 4
 truncation_symbol = "…/"
-read_only = " 󰌾"
-
-[directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = " "
-"Pictures" = " "
-"Projects" = "󱔗 "
+style = "bold cyan"
+format = "in [$path]($style)[$read_only]($read_only_style) "
+home_symbol = "󱂵 ~"
 
 [git_branch]
 symbol = " "
-style = "bg:#504945 fg:#ebdbb2"
-format = "[[ $symbol$branch ]($style)]"
+style = "bold purple"
+format = "on [$symbol$branch]($style) "
 
 [git_status]
-style = "bg:#504945 fg:#fabd2f"
-format = "[[($all_status$ahead_behind )]($style)]"
-conflicted = "="
-ahead = "⇡${count}"
-behind = "⇣${count}"
-diverged = "⇕⇡${ahead_count}⇣${behind_count}"
-up_to_date = ""
+style = "bold red"
+format = "([\\[$all_status$ahead_behind\\]]($style) )"
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇕"
+up_to_date = "✔"
 untracked = "?"
 stashed = "$"
 modified = "!"
@@ -82,77 +61,78 @@ deleted = "✘"
 
 [nix_shell]
 symbol = " "
-style = "bg:#d65d0e fg:#ebdbb2"
-format = "[[ $symbol$state $name ]($style)]"
+style = "bold blue"
+format = "via [$symbol$state( $name)]($style) "
 impure_msg = "impure"
 pure_msg = "pure"
 
-[container]
-symbol = "󰡨 "
-style = "bg:#d65d0e fg:#ebdbb2"
-format = "[[ $symbol$name ]($style)]"
-
-[python]
-symbol = " "
-style = "bg:#665c54"
-format = "[[ $symbol($version )(($virtualenv) )]($style)]"
-
-[rust]
-symbol = " "
-style = "bg:#665c54"
-format = "[[ $symbol($version) ]($style)]"
+# --- Backend & Web Languages ---
 
 [nodejs]
 symbol = " "
-style = "bg:#665c54"
-format = "[[ $symbol($version) ]($style)]"
+style = "bold green"
+format = "[$symbol($version )]($style)"
+detect_files = ["package.json", ".node-version"]
+detect_extensions = ["js", "ts", "jsx", "tsx"]
+
+[python]
+symbol = " "
+style = "bold yellow"
+format = "[$symbol($version )]($style)"
+pyenv_prefix = "venv "
+detect_extensions = ["py"]
 
 [golang]
 symbol = " "
-style = "bg:#665c54"
-format = "[[ $symbol($version) ]($style)]"
+style = "bold cyan"
+format = "[$symbol($version )]($style)"
 
-[c]
-symbol = " "
-style = "bg:#665c54"
-format = "[[ $symbol($version) ]($style)]"
+[rust]
+symbol = " "
+style = "bold red"
+format = "[$symbol($version )]($style)"
+
+[php]
+symbol = " "
+style = "bold blue"
+format = "[$symbol($version )]($style)"
+
+[package]
+symbol = "󰏗 "
+style = "bold 208"
+format = "is [$symbol$version]($style) "
+
+# --- Dev Environment ---
 
 [docker_context]
 symbol = "󰡨 "
-style = "bg:#bdae93 fg:#3c3836"
-format = "[[ $symbol$context ]($style)]"
+style = "bold blue"
+format = "[$symbol$context]($style) "
+
+[container]
+symbol = "󰏖 "
+format = "[$symbol]($style) "
 
 [cmd_duration]
 min_time = 500
-style = "bg:#a89984 fg:#3c3836"
-format = "[[  $duration ]($style)]"
-
-[memory]
-disabled = false
-threshold = 75
-symbol = "󰍛 "
-format = "[$symbol${ram}( ${swap})]($style) "
-style = "bold dim white"
+style = "bold yellow"
+format = "took [$duration]($style) "
 
 [status]
 disabled = false
-format = "[$symbol $int]($style) "
-symbol = "󰯈"
-style = "bold red"
+symbol = "󰯈 "
+format = "[$symbol$int]($style) "
 
 [time]
 disabled = false
-time_format = "%R" # Hour:Minute
-format = "[ 󰥔 $time ]($style)"
+time_format = "%R" 
 style = "dim white"
+format = "at [$time]($style) "
 
-[battery]
-full_symbol = "󰁹"
-charging_symbol = "󰂄"
-discharging_symbol = "󰂃"
-[[battery.display]]
-threshold = 30
-style = "bold red"
+# --- Modules to ignore or silent ---
 
-[package]
-disabled = true
+[aws]
+symbol = "  "
+
+[gcloud]
+symbol = "  "

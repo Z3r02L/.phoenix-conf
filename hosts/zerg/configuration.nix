@@ -21,10 +21,24 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.initrd.systemd.enable = true;
 
   # Enable fish shell
   programs.fish.enable = true;
   programs.amnezia-vpn.enable = true;
+
+  # Оптимизация памяти (ZRAM)
+  zramSwap.enable = true;
+
+  # Поддержка игр
+  programs.steam.enable = true;
+  programs.gamemode.enable = true;
+
+  # Обслуживание Btrfs
+  services.btrfs.autoScrub = {
+    enable = true;
+    interval = "weekly";
+  };
 
   services.cloudflare-warp.enable = true;
 
