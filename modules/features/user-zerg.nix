@@ -13,7 +13,7 @@
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
     home-manager.extraSpecialArgs = {
-      inputs = { inherit self; };
+      inherit inputs self;
     };
     home-manager.users.zerg = import ../../users/zerg/home.nix;
   };

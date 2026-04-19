@@ -108,56 +108,9 @@
 
   # System packages
   environment.systemPackages = with pkgs; [
-    zerotierone
-
-    file
-    eza
-    zoxide
-    yazi
-    bat
-    fd
-    ripgrep-all
-    fzf
-    wget
-    curl
-    killall
-    zip
-    unzip
-    jq
-    rsync
-    borgbackup
-    coreutils
-    ydotool
-    gnupg
-    age
-    tree
-
-    nixd
     nh
-    statix
-    alejandra
-    direnv
-    devenv
-    nix-output-monitor
+    nixd
 
-    lazygit
-    lazyjj
-
-    nmap
-
-    (pass-wayland.withExtensions (exts: with exts; [
-      pass-otp
-      pass-import
-      pass-audit
-    ]))
-
-    btop
-    trash-cli
-    tldr
-    fastfetch
-    microfetch
-
-    file-roller
     podman
     podman-compose
   ];

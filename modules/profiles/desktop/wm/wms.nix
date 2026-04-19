@@ -24,10 +24,6 @@
 
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
 
-    brave
-    ungoogled-chromium
-    librewolf
-
     pcmanfm
 
     xdg-utils
@@ -37,12 +33,5 @@
 
     gnome-settings-daemon
     gsettings-desktop-schemas
-
-    telegram-desktop
-
-    tmux
-    alacritty kitty
-    zsh fish nushell
-    zed-editor-fhs vscode-fhs antigravity-fhs
   ];
 }

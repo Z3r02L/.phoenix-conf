@@ -39,6 +39,7 @@ environment.sessionVariables = {
   # Отключаем G-Sync/VRR, так как они могут вызывать мерцание при захвате
   __GL_GSYNC_ALLOWED = "0";
   __GL_VRR_ALLOWED = "0";
+  __GL_MaxFramesAllowed = "1";
 };
 
   # Параметры ядра для Nvidia
@@ -52,7 +53,7 @@ environment.sessionVariables = {
 environment.etc."nvidia/nvidia-application-profiles-rc.d/50-niri.json".text = builtins.toJSON {
   rules = [
     {
-      pattern = { feature = "procname"; matches = "niri"; };
+      pattern = { feature = "procname"; matches = "niri|mango"; };
       profile = "Limit Free Buffer Pool On Wayland Compositors";
     }
   ];

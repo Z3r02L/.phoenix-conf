@@ -20,16 +20,6 @@ let
 in
 {
   home.stateVersion = "25.05";
-
-  # ── Password store (pass) ──────────────────────────────────────
-  programs.password-store = {
-    enable = true;
-    package = pkgs.pass-wayland;
-    settings = {
-      PASSWORD_STORE_DIR = "/home/zerg/.password-store";
-    };
-  };
-
   gtk = {
     enable = true;
     # theme = {
@@ -40,31 +30,40 @@ in
     gtk4.theme = null;
   };
 
-
   home.packages = with pkgs; [
       # Shells
-      zsh fish
+      zsh fish nushell
+      starship direnv devenv
 
       # Terminal utilities
-      tmux starship
-      yazi lf
-      btop microfetch fastfetch
+      tmux btop
+      yazi lf pcmanfm file-roller
+      microfetch fastfetch
+      file eza zoxide bat fd ripgrep-all fzf
+      killall zip unzip jq rsync tree
+      trash-cli tldr
+      ydotool
 
       # Network utilities
-      wget curl
+      wget curl nmap
+      borgbackup
 
       # Version control
       git lazygit jujutsu lazyjj
+      gnupg age
+
+      # Nix tools
+      nix-output-monitor alejandra statix
 
       # Terminal emulators
       alacritty kitty wezterm
 
       # Editors
-      zed-editor-fhs helix vscode-fhs antigravity # временно отключён из-за повреждённого tarball
+      zed-editor-fhs helix vscode-fhs antigravity
 
       # Browsers
       librewolf brave ungoogled-chromium
-      # Additional packages for Wayland support
+      inputs.helium.packages.${pkgs.system}.default
       xdg-utils
 
       # Communication
@@ -80,12 +79,24 @@ in
       zapret
       cloudflare-warp
       cloudflared
-      
+
       # Media
       qbittorrent syncthing
       audacity vlc mpv kdePackages.kdenlive
-      # reaper
- ];
+  ];
+
+  # ── Password store (pass) ──────────────────────────────────────
+  programs.password-store = {
+    enable = true;
+    package = pkgs.pass-wayland.withExtensions (exts: with exts; [
+      pass-otp
+      pass-import
+      pass-audit
+    ]);
+    settings = {
+      PASSWORD_STORE_DIR = "${config.home.homeDirectory}/.password-store";
+    };
+  };
 
   # Vesktop configuration for Wayland screencast
   home.file.".config/vesktop/settings.json".text = builtins.toJSON {
@@ -124,7 +135,7 @@ in
   # Используется умная функция smartLinkFile (зависит от переменной isDev в начале файла)
   xdg.configFile."niri/config.kdl".source = smartLinkFile "niri/config.kdl";
   
-  # Пример: если захотите привязать целую папку, используйте smartLink:
-  # xdg.configFile."waybar".source = smartLink "waybar";
+  xdg.configFile."mango".source = smartLink "mango";
+  xdg.configFile."noctalia".source = smartLink "noctalia";
 
 }
