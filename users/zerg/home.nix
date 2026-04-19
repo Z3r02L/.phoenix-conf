@@ -74,7 +74,7 @@ in
 
       # Media
       qbittorrent syncthing
-      audacity vlc mpv kdePackages.kdenlive
+      audacity vlc mpv kdePackages.kdenlive obs-studio
 
       # Icon themes
       papirus-icon-theme

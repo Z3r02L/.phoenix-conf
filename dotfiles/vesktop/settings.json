@@ -1,9 +1,15 @@
 {
-    "arRPC": false,
-    "discordBranch": "stable",
+    "arRPC": true,
+    "discordBranch": "canary",
     "firstLaunch": false,
     "minimizeToTray": false,
     "usePipewire": true,
     "splashColor": "rgb(239, 239, 241)",
-    "splashBackground": "rgb(18, 18, 20)"
+    "splashBackground": "rgb(18, 18, 20)",
+    "audio": {
+        "ignoreVirtual": true,
+        "granularSelect": true,
+        "deviceSelect": true
+    },
+    "hardwareVideoAcceleration": false
 }

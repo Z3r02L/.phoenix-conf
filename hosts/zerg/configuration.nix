@@ -93,6 +93,11 @@
         "org.freedesktop.impl.portal.Screenshot" = "gnome";
         default = pkgs.lib.mkForce "gtk";
       };
+      mango = {
+        "org.freedesktop.impl.portal.Screencast" = "gnome";
+        "org.freedesktop.impl.portal.Screenshot" = "gnome";
+        default = pkgs.lib.mkForce "gtk";
+      };
     };
   };
 

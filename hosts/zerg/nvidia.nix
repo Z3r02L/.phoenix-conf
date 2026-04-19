@@ -38,6 +38,9 @@ environment.sessionVariables = {
   SDL_VIDEODRIVER = "wayland";
   CLUTTER_BACKEND = "wayland";
 
+  # Фикс черного экрана в OBS Studio на Wayland + Nvidia
+  OBS_USE_EGL = "1";
+
   # Отключаем G-Sync/VRR, так как они могут вызывать мерцание при захвате
   __GL_GSYNC_ALLOWED = "0";
   __GL_VRR_ALLOWED = "0";
