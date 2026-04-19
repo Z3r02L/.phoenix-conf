@@ -47,7 +47,7 @@
         "autoHideDelay": 500,
         "autoShowDelay": 150,
         "backgroundOpacity": 0.9,
-        "barType": "floating",
+        "barType": "simple",
         "capsuleColorKey": "none",
         "capsuleOpacity": 1,
         "contentPadding": 2,
@@ -265,7 +265,7 @@
         "predefinedScheme": "Gruvbox",
         "schedulingMode": "off",
         "syncGsettings": true,
-        "useWallpaperColors": false
+        "useWallpaperColors": true
     },
     "controlCenter": {
         "cards": [
@@ -354,7 +354,7 @@
         "deadOpacity": 0.6,
         "displayMode": "auto_hide",
         "dockType": "floating",
-        "enabled": true,
+        "enabled": false,
         "floatingRatio": 1,
         "groupApps": false,
         "groupClickAction": "cycle",
@@ -448,14 +448,14 @@
     "hooks": {
         "colorGeneration": "",
         "darkModeChange": "",
-        "enabled": false,
+        "enabled": true,
         "performanceModeDisabled": "",
         "performanceModeEnabled": "",
         "screenLock": "",
         "screenUnlock": "",
         "session": "",
         "startup": "",
-        "wallpaperChange": ""
+        "wallpaperChange": "cp \"$1\" /home/zerg/.phoenix-conf/dotfiles/wallpapers/current.png"
     },
     "idle": {
         "customCommands": "[]",
@@ -672,7 +672,7 @@
     },
     "wallpaper": {
         "automationEnabled": false,
-        "directory": "/home/zerg/Pictures/Wallpapers",
+        "directory": "/home/zerg/.phoenix-conf/dotfiles/wallpapers",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "favorites": [

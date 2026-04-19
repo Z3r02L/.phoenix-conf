@@ -2,8 +2,7 @@
 {
   stylix = {
     enable = true;
-    image = ./../../../dotfiles/wallpapers/gruvbox-mountain-village.png;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+    image = ./../../../dotfiles/wallpapers/current.png;
     polarity = "dark";
     
     fonts = {
