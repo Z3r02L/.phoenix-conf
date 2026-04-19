@@ -1,6 +1,6 @@
-# Configuration for starship prompt (Gruvbox Edition)
+# Configuration for starship prompt (Ultra Functional Gruvbox)
 
-# Use a custom format for a clean, modern look
+# format = Two-line layout for maximum command space
 format = """
 [░▒▓](#7c6f64)\
 [  ](bg:#7c6f64 fg:#ebdbb2)\
@@ -9,67 +9,150 @@ $directory\
 [](fg:#3c3836 bg:#504945)\
 $git_branch\
 $git_status\
-[](fg:#504945 bg:#665c54)\
-$c\
+[](fg:#504945 bg:#d65d0e)\
+$nix_shell\
+$container\
+[](fg:#d65d0e bg:#665c54)\
+$python\
 $rust\
-$golang\
 $nodejs\
+$golang\
 $php\
 $java\
-$nix_shell\
+$elixir\
+$c\
 [](fg:#665c54 bg:#bdae93)\
+$docker_context\
+$kubernetes\
+[](fg:#bdae93 bg:#a89984)\
 $cmd_duration\
-[](fg:#bdae93 bg:#d65d0e)\
+[](fg:#a89984)\
+$line_break\
 $character\
-[ ](fg:#d65d0e)\
 """
 
-# Wait for command completion
+# Right-side prompt info
+right_format = """
+$memory\
+$battery\
+$status\
+$time\
+"""
+
 add_newline = true
+
+[character]
+success_symbol = "[󰄬 ](bold green)"
+error_symbol = "[󰅖 ](bold red)"
+vimcmd_symbol = "[󰄬 ](bold yellow)"
 
 [directory]
 style = "bg:#3c3836 fg:#ebdbb2"
 format = "[ $path ]($style)"
-truncation_length = 3
+truncation_length = 4
 truncation_symbol = "…/"
+read_only = " 󰌾"
 
 [directory.substitutions]
 "Documents" = "󰈙 "
 "Downloads" = " "
 "Music" = " "
 "Pictures" = " "
+"Projects" = "󱔗 "
 
 [git_branch]
-symbol = ""
+symbol = " "
 style = "bg:#504945 fg:#ebdbb2"
-format = "[[ $symbol $branch ]($style)]"
+format = "[[ $symbol$branch ]($style)]"
 
 [git_status]
 style = "bg:#504945 fg:#fabd2f"
 format = "[[($all_status$ahead_behind )]($style)]"
-
-[nodejs]
-symbol = ""
-style = "bg:#665c54"
-format = "[[ $symbol ($version) ]($style)]"
-
-[rust]
-symbol = ""
-style = "bg:#665c54"
-format = "[[ $symbol ($version) ]($style)]"
+conflicted = "="
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+up_to_date = ""
+untracked = "?"
+stashed = "$"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✘"
 
 [nix_shell]
-symbol = ""
-style = "bg:#665c54 fg:#ebdbb2"
-format = "[[ $symbol $state ]($style)]"
+symbol = " "
+style = "bg:#d65d0e fg:#ebdbb2"
+format = "[[ $symbol$state $name ]($style)]"
+impure_msg = "impure"
+pure_msg = "pure"
+
+[container]
+symbol = "󰡨 "
+style = "bg:#d65d0e fg:#ebdbb2"
+format = "[[ $symbol$name ]($style)]"
+
+[python]
+symbol = " "
+style = "bg:#665c54"
+format = "[[ $symbol($version )(($virtualenv) )]($style)]"
+
+[rust]
+symbol = " "
+style = "bg:#665c54"
+format = "[[ $symbol($version) ]($style)]"
+
+[nodejs]
+symbol = " "
+style = "bg:#665c54"
+format = "[[ $symbol($version) ]($style)]"
+
+[golang]
+symbol = " "
+style = "bg:#665c54"
+format = "[[ $symbol($version) ]($style)]"
+
+[c]
+symbol = " "
+style = "bg:#665c54"
+format = "[[ $symbol($version) ]($style)]"
+
+[docker_context]
+symbol = "󰡨 "
+style = "bg:#bdae93 fg:#3c3836"
+format = "[[ $symbol$context ]($style)]"
 
 [cmd_duration]
-style = "bg:#bdae93 fg:#3c3836"
+min_time = 500
+style = "bg:#a89984 fg:#3c3836"
 format = "[[  $duration ]($style)]"
 
-[character]
-success_symbol = "[ bg:#d65d0e fg:#ebdbb2](bold  bg:#d65d0e) "
-error_symbol = "[ bg:#d65d0e fg:#cc241d](bold bg:#d65d0e) "
+[memory]
+disabled = false
+threshold = 75
+symbol = "󰍛 "
+format = "[$symbol${ram}( ${swap})]($style) "
+style = "bold dim white"
+
+[status]
+disabled = false
+format = "[$symbol $int]($style) "
+symbol = "󰯈"
+style = "bold red"
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute
+format = "[ 󰥔 $time ]($style)"
+style = "dim white"
+
+[battery]
+full_symbol = "󰁹"
+charging_symbol = "󰂄"
+discharging_symbol = "󰂃"
+[[battery.display]]
+threshold = 30
+style = "bold red"
 
 [package]
 disabled = true

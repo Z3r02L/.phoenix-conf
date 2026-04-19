@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 let
   # Переключатель: true = живые конфиги (для редактирования), false = замороженные (в Nix Store)
@@ -75,6 +75,10 @@ in
       # Media
       qbittorrent syncthing
       audacity vlc mpv kdePackages.kdenlive
+
+      # Icon themes
+      papirus-icon-theme
+      adwaita-icon-theme
   ];
 
   # ── Password store (pass) ──────────────────────────────────────
@@ -129,5 +133,32 @@ in
   
   xdg.configFile."mango".source = smartLink "mango";
   xdg.configFile."noctalia".source = smartLink "noctalia";
+  xdg.configFile."starship.toml".source = smartLinkFile "starship/starship.toml";
 
+  # GTK Icon Theme configuration
+  gtk = {
+    enable = true;
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+  };
+
+  programs.fuzzel = {
+    enable = true;
+    settings = {
+      main = {
+        icon-theme = "Papirus-Dark";
+        include = "~/.config/fuzzel/themes/noctalia";
+        width = 45;
+        lines = 10;
+        # font = "JetBrainsMono Nerd Font Mono:size=14"; # Managed by Stylix
+        horizontal-pad = 25;
+        vertical-pad = 15;
+        inner-pad = 10;
+        border-width = 2;
+        border-radius = lib.mkForce 12;
+      };
+    };
+  };
 }

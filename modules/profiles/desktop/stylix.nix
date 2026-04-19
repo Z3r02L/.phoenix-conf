@@ -1,10 +1,5 @@
 { pkgs, ... }: 
-  let
-    monoFont = {
-      package = pkgs.nerd-fonts.jetbrains-mono;
-      name = "JetBrainsMono Nerd Font Mono";
-    };
-  in {
+{
   stylix = {
     enable = true;
     image = ./../../../dotfiles/wallpapers/gruvbox-mountain-village.png;
@@ -12,12 +7,28 @@
     polarity = "dark";
     
     fonts = {
-      monospace = monoFont;
-      serif = monoFont;
-      sansSerif = monoFont;
+      monospace = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font Mono";
+      };
+      sansSerif = {
+        package = pkgs.inter;
+        name = "Inter";
+      };
+      serif = {
+        package = pkgs.noto-fonts;
+        name = "Noto Serif";
+      };
       emoji = {
         package = pkgs.noto-fonts-color-emoji;
         name = "Noto Color Emoji";
+      };
+
+      sizes = {
+        applications = 11;
+        terminal = 13;
+        desktop = 11;
+        popups = 12;
       };
     };
     
@@ -36,6 +47,5 @@
 
     targets.grub.enable = false;
     targets.nixos-icons.enable = true;
-    
   };
 }
