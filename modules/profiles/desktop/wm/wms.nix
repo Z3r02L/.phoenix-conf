@@ -38,12 +38,31 @@
     pcmanfm
 
     xdg-utils
-    xdg-desktop-portal
-    xdg-desktop-portal-gnome
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal-wlr
 
     gnome-settings-daemon
     gsettings-desktop-schemas
   ];
+
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome
+      xdg-desktop-portal-wlr
+    ];
+    config = {
+      common.default = [ "gnome" ];
+      niri = {
+        "org.freedesktop.impl.portal.Screencast" = [ "gnome" ];
+        "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+        default = lib.mkForce [ "gtk" ];
+      };
+      mango = {
+        "org.freedesktop.impl.portal.Screencast" = [ "gnome" ];
+        "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+        default = lib.mkForce [ "gtk" ];
+      };
+    };
+  };
 }

@@ -77,30 +77,6 @@
   programs.dconf.enable = true;
   xdg.mime.enable = true;
 
-  xdg.portal = {
-    enable = true;
-    xdgOpenUsePortal = true;
-
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gnome
-      xdg-desktop-portal-gtk
-    ];
-
-    config = {
-      common.default = "gtk";
-      niri = {
-        "org.freedesktop.impl.portal.Screencast" = "gnome";
-        "org.freedesktop.impl.portal.Screenshot" = "gnome";
-        default = pkgs.lib.mkForce "gtk";
-      };
-      mango = {
-        "org.freedesktop.impl.portal.Screencast" = "gnome";
-        "org.freedesktop.impl.portal.Screenshot" = "gnome";
-        default = pkgs.lib.mkForce "gtk";
-      };
-    };
-  };
-
   # PipeWire для screencast
   services.pipewire.enable = true;
   services.pipewire.wireplumber.enable = true;
