@@ -18,17 +18,35 @@ in {
       runtimeInputs = [ pkgs.zoxide ];
       flags = {
         "-C" = "source ${pkgs.writeText "fishy-fishy" ''
-          function fish_prompt
-              string join "" -- (set_color red) "[" (set_color yellow) $USER (set_color green) "@" (set_color blue) $hostname (set_color magenta) " " $(prompt_pwd) (set_color red) ']' (set_color normal) "\$ "
-          end
-
           set fish_greeting
           fish_vi_key_bindings
 
+          # Инициализация современных инструментов
+          ${getExe pkgs.starship} init fish | source
           ${getExe pkgs.zoxide} init fish | source
 
-          function lf --wraps="lf" --description="lf - Terminal file manager (changing directory on exit)"
-              cd "$(command lf -print-last-dir $argv)"
+          # Умные сокращения (Abbreviations) - расширяются при нажатии пробела
+          if status is-interactive
+              # Git
+              abbr -a g git
+              abbr -a gs git status
+              abbr -a ga git add
+              abbr -a gc git commit
+              abbr -a gp git push
+              abbr -a gl git log --graph --oneline --all
+
+              # Nix / Phoenix
+              abbr -a nrs nh os switch .
+              abbr -a nrb nh os boot .
+              abbr -a nfu nix flake update
+              abbr -a ncg nix-collect-garbage -d
+
+              # Замена стандартных команд на улучшенные версии
+              abbr -a ls eza --icons --group-directories-first
+              abbr -a ll eza -l --icons --group-directories-first
+              abbr -a cat bat
+              abbr -a grep rg
+              abbr -a top btop
           end
         ''}";
       };

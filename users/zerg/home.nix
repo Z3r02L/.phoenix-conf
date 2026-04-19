@@ -20,15 +20,7 @@ let
 in
 {
   home.stateVersion = "25.05";
-  gtk = {
-    enable = true;
-    # theme = {
-    #   name = "Adwaita-dark"; # Your theme
-    #   package = pkgs.gnome.adwaita-icon-theme;
-    # };
-    # Add this to adopt the new default
-    gtk4.theme = null;
-  };
+  # GTK theming is handled by Stylix
 
   home.packages = with pkgs; [
       # Shells
@@ -37,7 +29,7 @@ in
 
       # Terminal utilities
       tmux btop
-      yazi lf pcmanfm file-roller
+      yazi pcmanfm file-roller
       microfetch fastfetch
       file eza zoxide bat fd ripgrep-all fzf
       killall zip unzip jq rsync tree
@@ -56,7 +48,7 @@ in
       nix-output-monitor alejandra statix
 
       # Terminal emulators
-      alacritty kitty wezterm
+      alacritty kitty
 
       # Editors
       zed-editor-fhs helix vscode-fhs antigravity

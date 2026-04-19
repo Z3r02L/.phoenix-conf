@@ -1,37 +1,75 @@
-# Configuration for starship prompt
+# Configuration for starship prompt (Gruvbox Edition)
 
-# Set the default prompt format
-format = "$all"
+# Use a custom format for a clean, modern look
+format = """
+[░▒▓](#7c6f64)\
+[  ](bg:#7c6f64 fg:#ebdbb2)\
+[](fg:#7c6f64 bg:#3c3836)\
+$directory\
+[](fg:#3c3836 bg:#504945)\
+$git_branch\
+$git_status\
+[](fg:#504945 bg:#665c54)\
+$c\
+$rust\
+$golang\
+$nodejs\
+$php\
+$java\
+$nix_shell\
+[](fg:#665c54 bg:#bdae93)\
+$cmd_duration\
+[](fg:#bdae93 bg:#d65d0e)\
+$character\
+[ ](fg:#d65d0e)\
+"""
 
-# Configure the line break
+# Wait for command completion
 add_newline = true
 
-# Configure specific modules
-[character]
-success_symbol = "[→](bold green)"
-error_symbol = "[→](bold red)"
+[directory]
+style = "bg:#3c3836 fg:#ebdbb2"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
 
 [git_branch]
-symbol = "🌱 "
-format = "[$symbol$branch]($style) "
-
-[username]
-format = "[$user]($style)@"
-show_always = true
-
-[hostname]
-format = "[$hostname]($style):"
-ssh_only = false
-
-[directory]
-format = "[$path]($style)[$read_only]($read_only_style) "
-
-[cmd_duration]
-format = " [$duration]($style)"
+symbol = ""
+style = "bg:#504945 fg:#ebdbb2"
+format = "[[ $symbol $branch ]($style)]"
 
 [git_status]
-format = "([⁝ $all_status$ahead_behind]($style))"
+style = "bg:#504945 fg:#fabd2f"
+format = "[[($all_status$ahead_behind )]($style)]"
 
-# Disable the package module, too verbose
+[nodejs]
+symbol = ""
+style = "bg:#665c54"
+format = "[[ $symbol ($version) ]($style)]"
+
+[rust]
+symbol = ""
+style = "bg:#665c54"
+format = "[[ $symbol ($version) ]($style)]"
+
+[nix_shell]
+symbol = ""
+style = "bg:#665c54 fg:#ebdbb2"
+format = "[[ $symbol $state ]($style)]"
+
+[cmd_duration]
+style = "bg:#bdae93 fg:#3c3836"
+format = "[[  $duration ]($style)]"
+
+[character]
+success_symbol = "[ bg:#d65d0e fg:#ebdbb2](bold  bg:#d65d0e) "
+error_symbol = "[ bg:#d65d0e fg:#cc241d](bold bg:#d65d0e) "
+
 [package]
 disabled = true

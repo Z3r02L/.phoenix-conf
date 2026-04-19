@@ -10,7 +10,7 @@
     package = config.boot.kernelPackages.nvidiaPackages.latest;
     modesetting.enable = true;
     powerManagement.enable = true;
-    open = false;
+    open = true;
     nvidiaSettings = true;
 
     # Отключаем, так как на Wayland это может мешать захвату
@@ -27,8 +27,10 @@ environment.sessionVariables = {
   
   # Для стриминга и порталов
   NGX_DISABLE_IMAGE_SHARING = "1";
-  XDG_CURRENT_DESKTOP = "niri";
+  XDG_CURRENT_DESKTOP = "mango:niri";
   WLR_NO_HARDWARE_CURSORS = "1";
+  GBM_BACKEND = "nvidia-drm";
+  WLR_RENDERER = "vulkan";
   
   # Wayland backends
   QT_QPA_PLATFORM = "wayland;xcb";

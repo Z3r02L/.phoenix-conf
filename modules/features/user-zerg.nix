@@ -8,6 +8,7 @@
       isNormalUser = true;
       description = "zerg's account";
       extraGroups = [ "wheel" "networkmanager" ];
+      shell = pkgs.fish;
     };
 
     home-manager.useGlobalPkgs = true;
