@@ -1,12 +1,10 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{ config, pkgs, ... }: {
   imports = [
-    ./default.nix
- ];
+    ../zerg/hardware.nix
+  ];
+
+  networking.hostName = "l2";
+  system.stateVersion = "25.05";
 
   # Специфические настройки для l2
   # ...

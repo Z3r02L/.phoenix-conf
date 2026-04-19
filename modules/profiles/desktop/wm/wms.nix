@@ -3,44 +3,40 @@
     ./niri.nix
     ./hyprland.nix
     ../llm.nix
+    ../greetd.nix
+    ../stylix.nix
   ];
 
-  config = {
-    programs.hyprland.enable = true;
-    # niri configuration is handled in its own module
+  programs.hyprland.enable = true;
 
-    programs.mango.enable = true;
+  programs.mango.enable = true;
 
+  environment.systemPackages = with pkgs; [
+    fuzzel
 
-    environment.systemPackages = with pkgs; [
+    inputs.mangowm.packages.${pkgs.stdenv.hostPlatform.system}.default
 
-      fuzzel
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
 
-      inputs.mangowm.packages.${pkgs.stdenv.hostPlatform.system}.default
+    brave
+    ungoogled-chromium
+    librewolf
 
-      inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
-      # inputs.dankMaterialShell.nixosModules.dankMaterialShell - это модуль, не пакет!
+    pcmanfm
 
-      brave
-      ungoogled-chromium
-      librewolf
+    xdg-utils
+    xdg-desktop-portal
+    xdg-desktop-portal-gnome
+    xdg-desktop-portal-gtk
 
-      pcmanfm # Gui File Manager
+    gnome-settings-daemon
+    gsettings-desktop-schemas
 
-      # Additional packages for Wayland support
-      xdg-utils
-      xdg-desktop-portal
-      xdg-desktop-portal-gnome
+    telegram-desktop
 
-      telegram-desktop
-
-      tmux
-      alacritty kitty
-      zsh fish nushell
-      zed-editor-fhs vscode-fhs antigravity-fhs
-
-      # LLM-инструменты перенесены в ../llm.nix
-
-    ];
-  };
+    tmux
+    alacritty kitty
+    zsh fish nushell
+    zed-editor-fhs vscode-fhs antigravity-fhs
+  ];
 }

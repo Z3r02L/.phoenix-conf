@@ -7,34 +7,38 @@
     enable32Bit = true;
   };
   hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
     modesetting.enable = true;
     powerManagement.enable = true;
     open = false;
     nvidiaSettings = true;
 
-    # Обязательно для Wayland-композиторов (niri)
-    forceFullCompositionPipeline = true;
+    # Отключаем, так как на Wayland это может мешать захвату
+    forceFullCompositionPipeline = false;
   };
 
   # Переменные окружения для Nvidia + Wayland
 environment.sessionVariables = {
   NIXOS_OZONE_WL = "1";
+  ELECTRON_OZONE_PLATFORM_HINT = "wayland";
   LIBVA_DRIVER_NAME = "nvidia";
   __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-  GBM_BACKEND = "nvidia-drm";
   NVD_BACKEND = "direct";
   
   # Для стриминга и порталов
   NGX_DISABLE_IMAGE_SHARING = "1";
   XDG_CURRENT_DESKTOP = "niri";
+  WLR_NO_HARDWARE_CURSORS = "1";
+  
+  # Wayland backends
+  QT_QPA_PLATFORM = "wayland;xcb";
+  GDK_BACKEND = "wayland,x11";
+  SDL_VIDEODRIVER = "wayland";
+  CLUTTER_BACKEND = "wayland";
 
   # Отключаем G-Sync/VRR, так как они могут вызывать мерцание при захвате
   __GL_GSYNC_ALLOWED = "0";
   __GL_VRR_ALLOWED = "0";
-
-  # Если курсор пропадет — раскомментируй:
-  # WLR_NO_HARDWARE_CURSORS = "1";
 };
 
   # Параметры ядра для Nvidia

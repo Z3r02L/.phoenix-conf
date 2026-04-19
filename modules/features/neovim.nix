@@ -1,6 +1,9 @@
-{inputs, ...}: {
-  perSystem = {pkgs, ...}: let
-  in {
+{ inputs, ... }: {
+  flake.nixosModules.neovim = { config, pkgs, ... }: {
+    programs.neovim.enable = true;
+  };
+
+  perSystem = { pkgs, ... }: {
     packages.neovim = inputs.wrappers.lib.makeWrapper {
       inherit pkgs;
       package = pkgs.neovim;
@@ -15,7 +18,7 @@
         lua-language-server
       ];
       env = {
-        SHELL = "fish";
+        SHELL = "${pkgs.fish}/bin/fish";
       };
     };
   };

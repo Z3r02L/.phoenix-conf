@@ -41,7 +41,7 @@
       alacritty kitty wezterm
 
       # Editors
-      zed-editor-fhs helix # vscode-fhs временно отключён из-за повреждённого tarball
+      zed-editor-fhs helix vscode-fhs antigravity # временно отключён из-за повреждённого tarball
 
       # Browsers
       librewolf brave ungoogled-chromium
@@ -67,6 +67,30 @@
       audacity vlc mpv kdePackages.kdenlive
       # reaper
  ];
+
+  # Vesktop configuration for Wayland screencast
+  home.file.".config/vesktop/settings.json".text = builtins.toJSON {
+    discordBranch = "stable";
+    firstLaunch = false;
+    minimizeToTray = false;
+    arRPC = false;
+    usePipewire = true;
+  };
+
+  # Desktop file для Vesktop с флагами PipeWire screencast
+  home.file.".local/share/applications/vesktop-wayland.desktop".text = ''
+    [Desktop Entry]
+    Name=Vesktop (Wayland)
+    Comment=Vesktop with PipeWire screencast support
+    Exec=vesktop --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer,WaylandWindowDecorations --ozone-platform-hint=wayland --enable-webrtc-pipewire-capturer --disable-gpu-sandbox --disable-features=GpuProcessSandbox --disable-gpu-memory-buffer-video-frames --ignore-gpu-blocklist --enable-gpu-rasterization --enable-zero-copy
+    Icon=vesktop
+    Type=Application
+    Categories=Network;InstantMessaging;
+  '';
+
+  # Принудительная запись если файлы уже существуют
+  home.file.".config/vesktop/settings.json".force = true;
+  home.file.".local/share/applications/vesktop-wayland.desktop".force = true;
 
 #  programs.mpv = {
 #     enable = true;

@@ -1,16 +1,10 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
-  imports = [
-    ../zerg/hardware-configuration.nix
-    ../../modules/profiles/laptop.nix
+{ inputs, self, ... }:
+inputs.nixpkgs.lib.nixosSystem {
+  system = "x86_64-linux";
+  specialArgs = { inherit inputs; };
+  modules = [
+    ./configuration.nix
+    self.nixosModules.profile-laptop
+    self.nixosModules.nix
   ];
-
-  networking.hostName = "s1";
-  
-  # Дополнительные настройки для хоста s1
-  # ...
 }

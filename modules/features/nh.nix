@@ -1,6 +1,5 @@
-{inputs, ...}: let
-in {
-  perSystem = {pkgs, ...}: {
+{ inputs, ... }: {
+  perSystem = { pkgs, ... }: {
     packages.nh = inputs.wrappers.lib.makeWrapper {
       inherit pkgs;
       package = pkgs.nh;

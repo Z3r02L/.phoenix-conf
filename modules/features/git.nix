@@ -1,6 +1,9 @@
-{inputs, ...}: {
-  perSystem = {pkgs, ...}: let
-  in {
+{ inputs, ... }: {
+  flake.nixosModules.git = { config, pkgs, ... }: {
+    programs.git.enable = true;
+  };
+
+  perSystem = { pkgs, ... }: {
     packages.git = inputs.wrappers.lib.makeWrapper {
       inherit pkgs;
       package = pkgs.git;
