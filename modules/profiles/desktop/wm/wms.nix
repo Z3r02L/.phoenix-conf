@@ -12,6 +12,19 @@
     layout = "us,ru";
     options = "grp:lalt_lshift_toggle"; # укажите свою комбинацию
   };
+  
+  fonts.fontconfig = {
+    enable = true;
+    antialias = true;
+    hinting = {
+      enable = true;
+      style = "slight"; # "slight" обычно лучше всего для современных шрифтов
+    };
+    subpixel = {
+      rgba = "rgb";
+      lcdfilter = "default";
+    };
+  };
 
   programs.hyprland.enable = true;
 

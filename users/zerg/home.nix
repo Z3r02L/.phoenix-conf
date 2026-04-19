@@ -24,7 +24,7 @@ in
 
   home.packages = with pkgs; [
       # Shells
-      zsh fish nushell
+      fish nushell zsh
       starship direnv devenv
 
       # Terminal utilities
@@ -51,7 +51,7 @@ in
       alacritty kitty
 
       # Editors
-      zed-editor-fhs helix vscode-fhs antigravity
+      zed-editor-fhs vscode-fhs antigravity-fhs
 
       # Browsers
       librewolf brave ungoogled-chromium
@@ -94,28 +94,12 @@ in
     };
   };
 
-  # Vesktop configuration for Wayland screencast
-  home.file.".config/vesktop/settings.json".text = builtins.toJSON {
-    discordBranch = "stable";
-    firstLaunch = false;
-    minimizeToTray = false;
-    arRPC = false;
-    usePipewire = true;
-  };
-
-  # Desktop file для Vesktop с флагами PipeWire screencast
-  home.file.".local/share/applications/vesktop-wayland.desktop".text = ''
-    [Desktop Entry]
-    Name=Vesktop (Wayland)
-    Comment=Vesktop with PipeWire screencast support
-    Exec=vesktop --ozone-platform-hint=wayland --enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer
-    Icon=vesktop
-    Type=Application
-    Categories=Network;InstantMessaging;
-  '';
+  # Vesktop configuration via dotfiles (One Folder Plan)
+  xdg.configFile."vesktop/settings.json".source = smartLinkFile "vesktop/settings.json";
+  home.file.".local/share/applications/vesktop-wayland.desktop".source = smartLinkFile "vesktop/vesktop-wayland.desktop";
 
   # Принудительная запись если файлы уже существуют
-  home.file.".config/vesktop/settings.json".force = true;
+  xdg.configFile."vesktop/settings.json".force = true;
   home.file.".local/share/applications/vesktop-wayland.desktop".force = true;
 
 #  programs.mpv = {

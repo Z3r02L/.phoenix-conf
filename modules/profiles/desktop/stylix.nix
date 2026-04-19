@@ -12,12 +12,12 @@
         name = "JetBrainsMono Nerd Font Mono";
       };
       sansSerif = {
-        package = pkgs.inter;
-        name = "Inter";
+        package = pkgs.geist-font;
+        name = "Geist Sans";
       };
       serif = {
-        package = pkgs.noto-fonts;
-        name = "Noto Serif";
+        package = pkgs.ibm-plex;
+        name = "IBM Plex Serif";
       };
       emoji = {
         package = pkgs.noto-fonts-color-emoji;
@@ -25,10 +25,10 @@
       };
 
       sizes = {
-        applications = 11;
-        terminal = 13;
-        desktop = 11;
-        popups = 12;
+        applications = 12;
+        terminal = 15;
+        desktop = 12;
+        popups = 13;
       };
     };
     

@@ -1,0 +1,9 @@
+{
+    "arRPC": false,
+    "discordBranch": "stable",
+    "firstLaunch": false,
+    "minimizeToTray": false,
+    "usePipewire": true,
+    "splashColor": "rgb(239, 239, 241)",
+    "splashBackground": "rgb(18, 18, 20)"
+}

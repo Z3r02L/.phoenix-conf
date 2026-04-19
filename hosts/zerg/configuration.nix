@@ -6,6 +6,8 @@
   networking.hostName = "zerg";
   system.stateVersion = "25.05";
 
+  time.timeZone = "Europe/Moscow";
+
   # Бинарный кеш numtide
   nix.settings = {
     extra-substituters = [ "https://cache.numtide.com" ];
