@@ -8,6 +8,8 @@
 
   time.timeZone = "Europe/Moscow";
 
+  hardware.enableRedistributableFirmware = true;
+
   # Бинарный кеш numtide
   nix.settings = {
     extra-substituters = [ "https://cache.numtide.com" ];
