@@ -7,6 +7,12 @@
     ../stylix.nix
   ];
 
+  # Сообщаем системе (и XWayland) о наших раскладках
+  services.xserver.xkb = {
+    layout = "us,ru";
+    options = "grp:lalt_lshift_toggle"; # укажите свою комбинацию
+  };
+
   programs.hyprland.enable = true;
 
   programs.mango.enable = true;

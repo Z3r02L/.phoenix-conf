@@ -1,4 +1,23 @@
 { config, pkgs, inputs, ... }:
+
+let
+  # Переключатель: true = живые конфиги (для редактирования), false = замороженные (в Nix Store)
+  isDev = true; 
+
+  dotfilesAbs = "${config.home.homeDirectory}/.phoenix-conf/dotfiles";
+  
+  # Умная функция для папок
+  smartLink = folder: 
+    if isDev 
+    then config.lib.file.mkOutOfStoreSymlink "${dotfilesAbs}/${folder}"
+    else ../../dotfiles + "/${folder}";
+
+  # Умная функция для одиночных файлов
+  smartLinkFile = file: 
+    if isDev 
+    then config.lib.file.mkOutOfStoreSymlink "${dotfilesAbs}/${file}"
+    else ../../dotfiles + "/${file}";
+in
 {
   home.stateVersion = "25.05";
 
@@ -82,7 +101,7 @@
     [Desktop Entry]
     Name=Vesktop (Wayland)
     Comment=Vesktop with PipeWire screencast support
-    Exec=vesktop --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer,WaylandWindowDecorations --ozone-platform-hint=wayland --enable-webrtc-pipewire-capturer --disable-gpu-sandbox --disable-features=GpuProcessSandbox --disable-gpu-memory-buffer-video-frames --ignore-gpu-blocklist --enable-gpu-rasterization --enable-zero-copy
+    Exec=vesktop --ozone-platform-hint=wayland --enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer
     Icon=vesktop
     Type=Application
     Categories=Network;InstantMessaging;
@@ -101,5 +120,11 @@
 #     scripts = [ pkgs.mpvScripts.mpris ];
 #   };
 
+  # Синхронизация конфигов из директории dotfiles
+  # Используется умная функция smartLinkFile (зависит от переменной isDev в начале файла)
+  xdg.configFile."niri/config.kdl".source = smartLinkFile "niri/config.kdl";
+  
+  # Пример: если захотите привязать целую папку, используйте smartLink:
+  # xdg.configFile."waybar".source = smartLink "waybar";
 
 }

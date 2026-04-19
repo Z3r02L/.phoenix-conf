@@ -10,9 +10,11 @@
       extraGroups = [ "wheel" "networkmanager" ];
     };
 
-    home-manager.users.zerg = import ../../users/zerg/home.nix {
-      inherit config pkgs;
+    home-manager.useGlobalPkgs = true;
+    home-manager.useUserPackages = true;
+    home-manager.extraSpecialArgs = {
       inputs = { inherit self; };
     };
+    home-manager.users.zerg = import ../../users/zerg/home.nix;
   };
 }

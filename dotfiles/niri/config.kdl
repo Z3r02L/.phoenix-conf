@@ -1,14 +1,12 @@
 prefer-no-csd
 
 input {
-    keyboard {
-        repeat-delay 200
-        repeat-rate 35
+
+keyboard {
         xkb {
-          layout "us,ru"
-          options "grp:win_space_toggle"
+            layout "us,ru"
+            options "grp:lalt_lshift_toggle"
         }
-        numlock
     }
 
     touchpad {
@@ -114,6 +112,8 @@ layout {
 
     struts {
     }
+
+    background-color "transparent"
 }
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
@@ -236,9 +236,6 @@ layer-rule {
 }
 
 // Set transparent workspace background color so you see the backdrop at all times.
-layout {
-  background-color "transparent"
-}
 
 // Optionally, disable the workspace shadows in the overview.
 overview {
@@ -250,9 +247,6 @@ overview {
 
 binds {
     // `niri msg action do-something`.
-
-    // Mod-Shift-/, which is usually the same as Mod-?,
-    // shows a list of important hotkeys.
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
