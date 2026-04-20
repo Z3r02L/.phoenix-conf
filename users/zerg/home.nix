@@ -35,7 +35,7 @@ in
       bitwarden-desktop bitwarden-cli
 
       # Terminal utilities
-      tmux zellij btop
+      tmux btop
       yazi pcmanfm file-roller
       microfetch fastfetch
       file eza bat fd ripgrep-all fzf
@@ -109,13 +109,18 @@ in
     };
   };
 
-  # Vesktop configuration via dotfiles (One Folder Plan)
+  # ── Синхронизация конфигов из директории dotfiles (Live-editing через smartLink) ──
+  xdg.configFile."yazi".source = smartLink "yazi";
+  home.file.".tmux.conf".source = smartLinkFile "tmux/tmux.conf";
+
+  # Vesktop configuration (One Folder Plan)
   xdg.configFile."vesktop/settings.json".source = smartLinkFile "vesktop/settings.json";
   home.file.".local/share/applications/vesktop-wayland.desktop".source = smartLinkFile "vesktop/vesktop-wayland.desktop";
 
-  # Принудительная запись если файлы уже существуют
+  # Принудительная запись (overwrite)
   xdg.configFile."vesktop/settings.json".force = true;
   home.file.".local/share/applications/vesktop-wayland.desktop".force = true;
+  home.file.".tmux.conf".force = true;
 
   programs.dank-material-shell = {
     enable = true;

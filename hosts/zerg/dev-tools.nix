@@ -35,6 +35,7 @@ in
     git-crypt
     git-lfs
     gh
+    tmux
 
     # Testing
     # pytest # ошибка

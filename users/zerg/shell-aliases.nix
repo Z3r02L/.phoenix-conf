@@ -9,7 +9,7 @@
   g = "git";
   ga = "git add";
   "ga." = "git add .";
-  gc = "git commit -m \"%cursor%\"";
+  gc = "git commit -m \"";
   "gcan!" = "git commit --amend --no-edit";
   gcl = "git clone";
   gd = "git diff";

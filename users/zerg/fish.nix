@@ -4,6 +4,12 @@
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
+      # Автозапуск Tmux
+      if status is-interactive
+      and not set -q TMUX
+        exec tmux
+      end
+
       set fish_greeting
       fish_vi_key_bindings
       starship init fish | source

@@ -54,9 +54,29 @@
     }];
     update.onActivation = true;
     packages = [
-      # "flathub:io.github.diegopvlk.Tomatillo"
-      # "flathub:org.inkscape.Inkscape"
+      "io.github.diegopvlk.Tomatillo"
+      "org.inkscape.Inkscape"
     ];
+  };
+
+  services.xremap = {
+    withWlroots = true;
+    userName = "zerg";
+    config = {
+      keymap = [
+        {
+          name = "Global Layout-independent Hotkeys";
+          remap = {
+            "C-Cyrillic_es" = "C-c";  # Ctrl+С -> Ctrl+C
+            "C-Cyrillic_em" = "C-v";  # Ctrl+М -> Ctrl+V
+            "C-Cyrillic_che" = "C-x"; # Ctrl+Ч -> Ctrl+X
+            "C-Cyrillic_ef" = "C-a";  # Ctrl+Ф -> Ctrl+A
+
+            "M-Cyrillic_ef" = "M-a";  # Alt+Ф -> Alt+a (наш префикс!)
+          };
+        }
+      ];
+    };
   };
 
   services.cloudflare-warp.enable = true;
@@ -134,5 +154,25 @@
   environment.variables = {
     EDITOR = "${pkgs.neovim}/bin/nvim";
     VISUAL = "zed-editor";
+  };
+
+  fonts.fontconfig = {
+    enable = true;
+    antialias = true;
+    hinting = {
+      enable = true;
+      autohint = false;
+      style = "slight"; # Самый современный и мягкий режим четкости
+    };
+    subpixel = {
+      rgba = "rgb"; # Оптимально для ЖК-мониторов
+      lcdfilter = "default";
+    };
+    # Указываем системе приоритетные шрифты для подмены
+    defaultFonts = {
+      monospace = [ "JetBrainsMono Nerd Font Mono" ];
+      sansSerif = [ "Inter" ];
+      serif     = [ "Noto Serif" ];
+    };
   };
 }

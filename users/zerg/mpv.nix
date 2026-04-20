@@ -18,6 +18,9 @@
       osc = "no";
       osd-bar = "no";
       border = "no";
+
+      # Настройки MPRIS для работы с главами (таймкодами)
+      script-opts = "mpris-report_chapters=yes";
     };
 
     bindings = {
