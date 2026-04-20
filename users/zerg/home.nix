@@ -19,6 +19,11 @@ let
     else ../../dotfiles + "/${file}";
 in
 {
+  imports = [
+    ./mpv.nix
+    ./fish.nix
+    inputs.dankMaterialShell.homeModules.default
+  ];
   home.stateVersion = "25.05";
   # GTK theming is handled by Stylix
 
@@ -27,8 +32,10 @@ in
       starship nushell zsh
       direnv devenv
 
+      bitwarden-desktop bitwarden-cli
+
       # Terminal utilities
-      tmux btop
+      tmux zellij btop
       yazi pcmanfm file-roller
       microfetch fastfetch
       file eza bat fd ripgrep-all fzf
@@ -74,7 +81,15 @@ in
 
       # Media
       qbittorrent syncthing
-      audacity vlc mpv kdePackages.kdenlive obs-studio
+      audacity kdePackages.kdenlive obs-studio yt-dlp ffmpeg-full
+      
+      blender 
+      
+      krita
+      inkscape-with-extensions # vector
+      darktable 
+      
+      lunacy # figma alt
 
       # Icon themes
       papirus-icon-theme
@@ -102,14 +117,10 @@ in
   xdg.configFile."vesktop/settings.json".force = true;
   home.file.".local/share/applications/vesktop-wayland.desktop".force = true;
 
-#  programs.mpv = {
-#     enable = true;
-#     package = pkgs.mpv;
-#     config = {
-#       vo = "gpu";
-#     };
-#     scripts = [ pkgs.mpvScripts.mpris ];
-#   };
+  programs.dank-material-shell = {
+    enable = true;
+  };
+
 
   # GTK Icon Theme configuration
   gtk = {
@@ -123,41 +134,6 @@ in
   programs.kitty.enable = true;
   programs.fuzzel.enable = true;
 
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      set fish_greeting
-      fish_vi_key_bindings
-      starship init fish | source
-    '';
-    shellAbbrs = {
-      ".." = "cd ..";
-      "..." = "cd ../..";
-      "...." = "cd ../../..";
-      "....." = "cd ../../../..";
-      g = "git";
-      gs = "git status";
-      ga = "git add";
-      gc = "git commit -m";
-      gp = "git push";
-      gl = "git log --graph --oneline --all";
-      gcl = "git clone";
-      gd = "git diff";
-      nrs = "nh os switch .";
-      nrb = "nh os boot .";
-      nfu = "nix flake update";
-      ncg = "nix-collect-garbage -d";
-      ns = "nix-shell -p";
-      ls = "eza --icons --group-directories-first";
-      ll = "eza -l --icons --group-directories-first --git";
-      lt = "eza --tree --icons --group-directories-first";
-      cat = "bat";
-      grep = "rg";
-      top = "btop";
-      v = "nvim";
-      zed = "zeditor";
-    };
-  };
 
   # programs.starship = {
   #   enable = true;

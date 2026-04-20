@@ -67,6 +67,7 @@
     # Software
     zapret-discord-youtube.url = "github:kartavkun/zapret-discord-youtube";
     helium.url = "github:schembriaiden/helium-browser-nix-flake";
+    nix-flatpak.url = "github:gmodena/nix-flatpak"; # Добавили тут
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, wrappers, flake-parts, import-tree, zapret-discord-youtube, ... }:

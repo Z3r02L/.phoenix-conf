@@ -19,5 +19,6 @@ inputs.nixpkgs.lib.nixosSystem {
 
     inputs.stylix.nixosModules.stylix
     inputs.mangowm.nixosModules.mango
+    inputs.nix-flatpak.nixosModules.nix-flatpak
   ];
 }

@@ -4,6 +4,7 @@
     enable = true;
     image = ./../../../dotfiles/wallpapers/current.png;
     polarity = "dark";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
     
     fonts = {
       monospace = {
@@ -24,10 +25,10 @@
       };
 
       sizes = {
-        applications = 12;
-        terminal = 15;
-        desktop = 12;
-        popups = 13;
+        applications = 16;
+        terminal = 16;
+        desktop = 16;
+        popups = 16;
       };
     };
     
@@ -38,10 +39,10 @@
     };
 
     opacity = {
-      applications = 0.9;
-      terminal = 0.8;
-      desktop = 0.8;
-      popups = 0.9;
+      applications = 1.0;
+      terminal = 0.95;
+      desktop = 0.95;
+      popups = 1.0;
     };
 
     targets.grub.enable = false;

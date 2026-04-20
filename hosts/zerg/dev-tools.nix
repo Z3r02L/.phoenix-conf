@@ -25,8 +25,6 @@ in
     # JavaScript
     nodejs_24 bun pnpm
     typescript-language-server
-    biome
-
 
     # Build tools
     cmake meson ninja
