@@ -11,5 +11,5 @@
         "granularSelect": true,
         "deviceSelect": true
     },
-    "hardwareVideoAcceleration": false
+    "hardwareVideoAcceleration": true
 }

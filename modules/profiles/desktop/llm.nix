@@ -13,6 +13,7 @@ in
     llm-agents.cli-proxy-api       # Универсальный прокси
 
     # Следующие пакеты могут собираться локально (нет в кеше numtide):
+    llm-agents.pi
     llm-agents.omp               # Multi-agent для opencode
     llm-agents.rtk               # Экономия токенов
 

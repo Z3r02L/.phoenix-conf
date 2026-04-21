@@ -10,8 +10,9 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  # Бинарный кеш numtide
+  # Бинарный кеш numtide и настройки доступа
   nix.settings = {
+    trusted-users = [ "root" ];
     extra-substituters = [ 
       "https://cache.numtide.com"
       "https://nix-community.cachix.org"
@@ -20,14 +21,37 @@
       "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
+
+    # Используем GitHub Token для обхода лимитов API, если файл существует
+    access-tokens = [ "github.com=${pkgs.lib.optionalString (builtins.pathExists "/home/zerg/.config/nix/github-token") (pkgs.lib.replaceStrings ["\n" " "] ["" ""] (builtins.readFile "/home/zerg/.config/nix/github-token"))}" ];
   };
 
   boot.kernelPackages = pkgs.linuxPackages_6_18;
+
+  # Настройка виртуальной камеры для OBS и Vesktop
+  boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+  boot.kernelModules = [ "v4l2loopback" ];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=1 video_nr=10 card_label="OBS Virtual Camera" exclusive_caps=1 max_buffers=2
+  '';
+
+  # Правила udev для обеспечения прав доступа к видеоустройствам
+  services.udev.extraRules = ''
+    KERNEL=="video[0-9]*", GROUP="video", MODE="0660"
+  '';
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.systemd.enable = true;
+
+  # Безопасность ядра
+  boot.kernel.sysctl = {
+    "kernel.unprivileged_userns_clone" = 1; # Нужно для песочниц браузеров
+    "net.ipv4.conf.all.rp_filter" = 1;
+    "net.ipv4.conf.default.rp_filter" = 1;
+    "net.ipv4.icmp_echo_ignore_all" = 1; # Игнорировать пинг (стелс-режим)
+  };
 
   # Enable fish shell
   programs.fish.enable = true;
@@ -114,6 +138,20 @@
   programs.dconf.enable = true;
   xdg.mime.enable = true;
 
+  security = {
+    apparmor.enable = true;
+    protectKernelImage = true;
+    forcePageTableIsolation = true; # Защита от Meltdown
+    rtkit.enable = true;
+    chromiumSuidSandbox.enable = true; # Позволяет браузерам иметь песочницу без лишних прав пользователя
+    sudo.execWheelOnly = true; # Только пользователи в wheel могут запускать sudo
+  };
+
+  networking.firewall = {
+    enable = true;
+    allowPing = false;
+  };
+
   # PipeWire для screencast
   services.pipewire.enable = true;
   services.pipewire.wireplumber.enable = true;
@@ -146,6 +184,8 @@
   environment.systemPackages = with pkgs; [
     nh
     nixd
+
+    v4l-utils
 
     podman
     podman-compose

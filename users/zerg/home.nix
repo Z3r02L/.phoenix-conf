@@ -116,10 +116,12 @@ in
   # Vesktop configuration (One Folder Plan)
   xdg.configFile."vesktop/settings.json".source = smartLinkFile "vesktop/settings.json";
   home.file.".local/share/applications/vesktop-wayland.desktop".source = smartLinkFile "vesktop/vesktop-wayland.desktop";
+  home.file.".pi/agent/settings.json".source = smartLinkFile "pi/settings.json";
 
   # Принудительная запись (overwrite)
   xdg.configFile."vesktop/settings.json".force = true;
   home.file.".local/share/applications/vesktop-wayland.desktop".force = true;
+  home.file.".pi/agent/settings.json".force = true;
   home.file.".tmux.conf".force = true;
 
   programs.dank-material-shell = {

@@ -35,6 +35,14 @@
 
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
 
+    # WM Utilities
+    brightnessctl
+    playerctl
+    grim
+    slurp
+    wl-clipboard
+    swaylock
+
     pcmanfm
 
     xdg-utils

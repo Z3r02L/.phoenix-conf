@@ -31,6 +31,8 @@ environment.sessionVariables = {
   WLR_NO_HARDWARE_CURSORS = "1";
   GBM_BACKEND = "nvidia-drm";
   WLR_RENDERER = "vulkan";
+  WLR_DRM_NO_ATOMIC = "1";
+
   
   # Wayland backends
   QT_QPA_PLATFORM = "wayland;xcb";

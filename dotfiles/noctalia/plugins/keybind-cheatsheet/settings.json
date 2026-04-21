@@ -1,0 +1,25 @@
+{
+  "cheatsheetData": [
+    {
+      "title": "Unsupported Compositor",
+      "binds": [
+        {
+          "keys": "MANGO",
+          "desc": "MangoWC is not supported"
+        },
+        {
+          "keys": "INFO",
+          "desc": "MangoWC config format is not compatible with this plugin"
+        }
+      ]
+    }
+  ],
+  "detectedCompositor": "mango",
+  "windowWidth": 1400,
+  "windowHeight": 0,
+  "autoHeight": true,
+  "columnCount": 3,
+  "modKeyVariable": "$mod",
+  "hyprlandConfigPath": "~/.config/hypr/hyprland.conf",
+  "niriConfigPath": "~/.config/niri/config.kdl"
+}

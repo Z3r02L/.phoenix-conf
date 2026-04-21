@@ -29,7 +29,7 @@
         "showIconBackground": false,
         "sortByMostUsed": true,
         "terminalCommand": "alacritty -e",
-        "viewMode": "list"
+        "viewMode": "grid"
     },
     "audio": {
         "mprisBlacklist": [
@@ -87,6 +87,25 @@
                     "id": "WallpaperSelector"
                 },
                 {
+                    "defaultSettings": {
+                        "autoCloseManagedObs": true,
+                        "barLabelMode": "short-label",
+                        "launchBehavior": "minimized-to-tray",
+                        "leftClickAction": "panel",
+                        "openVideosAfterStop": true,
+                        "pollIntervalMs": 2500,
+                        "showBarWhenReady": true,
+                        "showBarWhenRecording": true,
+                        "showBarWhenReplay": false,
+                        "showBarWhenStreaming": true,
+                        "showControlCenterWhenReady": false,
+                        "showControlCenterWhenRecording": true,
+                        "showControlCenterWhenReplay": true,
+                        "showControlCenterWhenStreaming": true,
+                        "showElapsedInBar": false,
+                        "videosOpener": "xdg-open",
+                        "videosPath": ""
+                    },
                     "id": "plugin:obs-control"
                 },
                 {
@@ -174,6 +193,13 @@
             ],
             "right": [
                 {
+                    "defaultSettings": {
+                        "monitorOrder": [
+                        ]
+                    },
+                    "id": "plugin:mangowc-layout-switcher"
+                },
+                {
                     "displayMode": "onhover",
                     "iconColor": "none",
                     "id": "Network",
@@ -254,6 +280,44 @@
                 {
                     "iconColor": "error",
                     "id": "SessionMenu"
+                },
+                {
+                    "commandPrefix": "ssh",
+                    "defaultSettings": {
+                        "pollInterval": 10,
+                        "showInactiveHosts": true,
+                        "terminalCommand": ""
+                    },
+                    "id": "plugin:ssh-sessions"
+                },
+                {
+                    "defaultSettings": {
+                        "mode": "region"
+                    },
+                    "id": "plugin:screenshot"
+                },
+                {
+                    "defaultSettings": {
+                        "animationsFolder": "~/.config/niri/animations",
+                        "iconColor": "none",
+                        "targetFile": "~/.config/niri/config.kdl"
+                    },
+                    "id": "plugin:niri-animation-picker"
+                },
+                {
+                    "defaultSettings": {
+                        "autoHeight": true,
+                        "cheatsheetData": [
+                        ],
+                        "columnCount": 3,
+                        "detectedCompositor": "",
+                        "hyprlandConfigPath": "~/.config/hypr/hyprland.conf",
+                        "modKeyVariable": "$mod",
+                        "niriConfigPath": "~/.config/niri/config.kdl",
+                        "windowHeight": 0,
+                        "windowWidth": 1400
+                    },
+                    "id": "plugin:keybind-cheatsheet"
                 }
             ]
         }

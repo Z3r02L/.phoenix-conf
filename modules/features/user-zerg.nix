@@ -7,7 +7,7 @@
     users.users.zerg = {
       isNormalUser = true;
       description = "zerg's account";
-      extraGroups = [ "wheel" "networkmanager" ];
+      extraGroups = [ "wheel" "networkmanager" "input" "uinput" "video" ];
       shell = pkgs.fish;
     };
 
