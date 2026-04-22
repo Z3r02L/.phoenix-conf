@@ -121,7 +121,8 @@ spawn-at-startup "noctalia-shell"
 
 // Важно для работы порталов (GNOME screencast и т.д.) внутри niri
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "--all"
-spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "DISPLAY" "XDG_CURRENT_DESKTOP" "XDG_SESSION_TYPE" "NIRI_SOCKET"
+spawn-at-startup "systemd-run" "--user" "--on-active=8s" "--unit=niri-portal-restart" "sh" "-lc" "systemctl --user restart xdg-desktop-portal-gnome.service && systemctl --user restart xdg-desktop-portal.service"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"

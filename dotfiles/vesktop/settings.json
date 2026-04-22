@@ -1,6 +1,6 @@
 {
     "arRPC": true,
-    "discordBranch": "canary",
+    "discordBranch": "stable",
     "firstLaunch": false,
     "minimizeToTray": false,
     "usePipewire": true,

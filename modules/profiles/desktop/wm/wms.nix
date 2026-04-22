@@ -51,16 +51,31 @@
     xdgOpenUsePortal = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
+      # niri screencast works more reliably via the GNOME portal backend.
       xdg-desktop-portal-gnome
-      xdg-desktop-portal-wlr
     ];
     config = {
       common.default = [ "gnome" ];
       niri = {
-        "org.freedesktop.impl.portal.Screencast" = [ "gnome" ];
-        "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+        # Force ScreenCast/Screenshot to the GNOME backend so WebRTC/PipeWire
+        # apps like Vesktop can discover org.freedesktop.portal.ScreenCast.
+        "org.freedesktop.portal.Screencast" = [ "gnome" ];
+        "org.freedesktop.portal.Screenshot" = [ "gnome" ];
         default = lib.mkForce [ "gtk" ];
       };
     };
+  };
+
+  # xdg-desktop-portal-gnome only exposes ScreenCast reliably for this setup
+  # when it thinks it is running in a GNOME desktop session.
+  systemd.user.services.xdg-desktop-portal.environment = {
+    XDG_CURRENT_DESKTOP = "GNOME";
+    XDG_SESSION_DESKTOP = "GNOME";
+  };
+
+  # Keep the backend service in the same desktop context as the main portal.
+  systemd.user.services.xdg-desktop-portal-gnome.environment = {
+    XDG_CURRENT_DESKTOP = "GNOME";
+    XDG_SESSION_DESKTOP = "GNOME";
   };
 }

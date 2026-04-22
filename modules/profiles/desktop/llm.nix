@@ -8,8 +8,6 @@ in
   # Примечание: многие пакеты из llm-agents.nix не имеют гидраций
   # в кеше numtide и собираются локально. Оставлены только стабильные.
   environment.systemPackages = [
-    llm-agents.opencode            # AI-ассистент для терминали
-    llm-agents.claude-code-router  # Маршрутизатор к любым LLM-провайдерам
     llm-agents.cli-proxy-api       # Универсальный прокси
 
     # Следующие пакеты могут собираться локально (нет в кеше numtide):

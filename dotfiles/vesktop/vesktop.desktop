@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Vesktop
+Comment=Vesktop with PipeWire screencast support
+Exec=vesktop --ozone-platform=wayland --use-gl=egl --disable-gpu --disable-gpu-sandbox --enable-features=UseOzonePlatform,WaylandWindowDecorations,WebRTCPipeWireCapturer
+Icon=vesktop
+Type=Application
+Categories=Network;InstantMessaging;

@@ -6,6 +6,16 @@ let
 
   dotfilesAbs = "${config.home.homeDirectory}/.phoenix-conf/dotfiles";
 
+  vesktopWrapped = pkgs.writeShellScriptBin "vesktop" ''
+    exec ${pkgs.vesktop}/bin/vesktop \
+      --ozone-platform=wayland \
+      --use-gl=egl \
+      --disable-gpu \
+      --disable-gpu-sandbox \
+      --enable-features=UseOzonePlatform,WaylandWindowDecorations,WebRTCPipeWireCapturer \
+      "$@"
+  '';
+
   # Умная функция для папок
   smartLink = folder: 
     if isDev 
@@ -66,7 +76,7 @@ in
       xdg-utils
 
       # Communication
-      telegram-desktop signal-desktop vesktop
+      telegram-desktop signal-desktop vesktopWrapped
 
       # Office and productivity
       onlyoffice-desktopeditors
@@ -109,11 +119,13 @@ in
 
   # Vesktop configuration (One Folder Plan)
   xdg.configFile."vesktop/settings.json".source = smartLinkFile "vesktop/settings.json";
+  home.file.".local/share/applications/vesktop.desktop".source = smartLinkFile "vesktop/vesktop.desktop";
   home.file.".local/share/applications/vesktop-wayland.desktop".source = smartLinkFile "vesktop/vesktop-wayland.desktop";
   home.file.".pi/agent/settings.json".source = smartLinkFile "pi/settings.json";
 
   # Принудительная запись (overwrite)
   xdg.configFile."vesktop/settings.json".force = true;
+  home.file.".local/share/applications/vesktop.desktop".force = true;
   home.file.".local/share/applications/vesktop-wayland.desktop".force = true;
   home.file.".pi/agent/settings.json".force = true;
   home.file.".tmux.conf".force = true;
