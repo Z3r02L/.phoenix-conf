@@ -22,6 +22,8 @@ in
     llm-agents.gemini-cli
     # llm-agents.kilocode-cli
     llm-agents.code
+
+    llm-agents.handy # speech-to-text ai
   ];
 
   # ── Переменные окружения ──────────────────────────────────────────

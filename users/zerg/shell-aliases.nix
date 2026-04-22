@@ -22,7 +22,7 @@
   ncg = "nix-collect-garbage -d";
   nd = "nix develop";
   nfu = "nix flake update";
-  nhl = "nh os switch . -- --dry";
+  nhl = "nh os switch -n .";
   nopt = "nix-store --optimise";
   nr = "nix run";
   nrb = "git add . && nh os boot .";

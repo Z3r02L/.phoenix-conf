@@ -18,8 +18,6 @@ inputs.nixpkgs.lib.nixosSystem {
     self.nixosModules.git
 
     inputs.stylix.nixosModules.stylix
-    inputs.mangowm.nixosModules.mango
-    inputs.nix-flatpak.nixosModules.nix-flatpak
     inputs.xremap-nix.nixosModules.default
   ];
 }

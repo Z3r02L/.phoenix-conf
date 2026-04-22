@@ -1,7 +1,6 @@
 { config, pkgs, inputs, lib, ... }: {
   imports = [
     ./niri.nix
-    ./hyprland.nix
     ../llm.nix
     ../greetd.nix
     ../stylix.nix
@@ -26,12 +25,8 @@
     };
   };
 
-  programs.hyprland.enable = true;
-
-  programs.mango.enable = true;
 
   environment.systemPackages = with pkgs; [
-    inputs.mangowm.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
 
@@ -62,11 +57,6 @@
     config = {
       common.default = [ "gnome" ];
       niri = {
-        "org.freedesktop.impl.portal.Screencast" = [ "gnome" ];
-        "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
-        default = lib.mkForce [ "gtk" ];
-      };
-      mango = {
         "org.freedesktop.impl.portal.Screencast" = [ "gnome" ];
         "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
         default = lib.mkForce [ "gtk" ];

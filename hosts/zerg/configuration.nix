@@ -1,4 +1,77 @@
-{ config, pkgs, inputs, ... }: {
+{ config, pkgs, inputs, lib, ... }:
+let
+  defaultSystemTimezone = "Europe/Moscow";
+  vpnTimezoneProviders = [
+    "https://ipapi.co/timezone"
+    "https://ipinfo.io/timezone"
+  ];
+  vpnAwareProcesses = [
+    "warp-svc"
+    "warp-cli"
+    "v2raya"
+    "xray"
+    "xray-core"
+    "v2ray"
+    "v2rayn"
+    "v2rayN"
+    "sing-box"
+    "singbox"
+  ];
+  syncVpnTimezone = pkgs.writeShellScript "sync-vpn-timezone" ''
+    set -eu
+
+    default_tz=${lib.escapeShellArg defaultSystemTimezone}
+    current_tz="$(timedatectl show --property=Timezone --value 2>/dev/null || true)"
+    desired_tz="$default_tz"
+    vpn_active=0
+
+    if command -v warp-cli >/dev/null 2>&1; then
+      warp_status="$(warp-cli --accept-tos status 2>/dev/null || true)"
+      if printf '%s\n' "$warp_status" | grep -qi "Connected"; then
+        vpn_active=1
+      fi
+    fi
+
+    if [ "$vpn_active" -eq 0 ]; then
+      for candidate in ${lib.concatStringsSep " " (map lib.escapeShellArg vpnAwareProcesses)}; do
+        if pgrep -x "$candidate" >/dev/null 2>&1; then
+          vpn_active=1
+          break
+        fi
+      done
+    fi
+
+    if [ "$vpn_active" -eq 0 ]; then
+      for unit in v2raya.service sing-box.service singbox.service; do
+        if systemctl is-active --quiet "$unit" 2>/dev/null; then
+          vpn_active=1
+          break
+        fi
+      done
+    fi
+
+    if [ "$vpn_active" -eq 0 ]; then
+      if ip link show tun0 >/dev/null 2>&1 || ip link show singtun >/dev/null 2>&1; then
+        vpn_active=1
+      fi
+    fi
+
+    if [ "$vpn_active" -eq 1 ]; then
+      for provider in ${lib.concatStringsSep " " (map lib.escapeShellArg vpnTimezoneProviders)}; do
+        remote_tz="$(curl --fail --silent --show-error --max-time 5 "$provider" 2>/dev/null || true)"
+        if printf '%s' "$remote_tz" | grep -Eq '^[A-Za-z_]+(/[A-Za-z0-9_+-]+)+$'; then
+          desired_tz="$remote_tz"
+          break
+        fi
+      done
+    fi
+
+    if [ -n "$desired_tz" ] && [ "$desired_tz" != "$current_tz" ]; then
+      timedatectl set-timezone "$desired_tz"
+      logger -t vpn-timezone-sync "timezone switched to $desired_tz"
+    fi
+  '';
+in {
   imports = [
     inputs.zapret-discord-youtube.nixosModules.default
   ];
@@ -6,7 +79,7 @@
   networking.hostName = "zerg";
   system.stateVersion = "25.05";
 
-  time.timeZone = "Europe/Moscow";
+  time.timeZone = defaultSystemTimezone;
 
   hardware.enableRedistributableFirmware = true;
 
@@ -55,7 +128,6 @@
 
   # Enable fish shell
   programs.fish.enable = true;
-  programs.amnezia-vpn.enable = true;
 
   # Оптимизация памяти (ZRAM)
   zramSwap.enable = true;
@@ -68,19 +140,6 @@
   services.btrfs.autoScrub = {
     enable = true;
     interval = "weekly";
-  };
-
-  services.flatpak = {
-    enable = true;
-    remotes = [{
-      name = "flathub";
-      location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
-    }];
-    update.onActivation = true;
-    packages = [
-      "io.github.diegopvlk.Tomatillo"
-      "org.inkscape.Inkscape"
-    ];
   };
 
   services.xremap = {
@@ -105,13 +164,42 @@
 
   services.cloudflare-warp.enable = true;
 
+  systemd.services.vpn-timezone-sync = {
+    description = "Sync system timezone with VPN exit location";
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+    path = with pkgs; [
+      cloudflare-warp
+      coreutils
+      curl
+      gnugrep
+      iproute2
+      procps
+      systemd
+      util-linux
+    ];
+    serviceConfig = {
+      Type = "oneshot";
+    };
+    script = ''${syncVpnTimezone}'';
+  };
+
+  systemd.timers.vpn-timezone-sync = {
+    description = "Periodically update timezone to match VPN location";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "2m";
+      OnUnitActiveSec = "5m";
+      Unit = "vpn-timezone-sync.service";
+      Persistent = true;
+    };
+  };
+
   services.zerotierone.enable = true;
 
-  services.v2ray = {
+  services.v2raya = {
     enable = true;
-    config = {
-      # ... здесь содержимое конфига как Nix-структура ...
-    };
+    cliPackage = pkgs.xray;
   };
 
   # Zapret - обход блокировок
@@ -189,6 +277,8 @@
 
     podman
     podman-compose
+
+    sing-box
   ];
 
   environment.variables = {

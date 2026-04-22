@@ -5,6 +5,11 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    extraPackages = with pkgs; [
+      nvidia-vaapi-driver
+      libva-vdpau-driver
+      libvdpau-va-gl
+    ];
   };
   hardware.nvidia = {
     package = config.boot.kernelPackages.nvidiaPackages.latest;
@@ -12,46 +17,40 @@
     powerManagement.enable = true;
     open = true;
     nvidiaSettings = true;
-
-    # Отключаем, так как на Wayland это может мешать захвату
-    forceFullCompositionPipeline = false;
   };
 
   # Переменные окружения для Nvidia + Wayland
-environment.sessionVariables = {
-  NIXOS_OZONE_WL = "1";
-  ELECTRON_OZONE_PLATFORM_HINT = "wayland";
-  LIBVA_DRIVER_NAME = "nvidia";
-  __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-  NVD_BACKEND = "direct";
-  
-  # Для стриминга и порталов
-  NGX_DISABLE_IMAGE_SHARING = "1";
-  XDG_CURRENT_DESKTOP = "mango:niri";
-  WLR_NO_HARDWARE_CURSORS = "1";
-  GBM_BACKEND = "nvidia-drm";
-  WLR_RENDERER = "vulkan";
-  WLR_DRM_NO_ATOMIC = "1";
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    LIBVA_DRIVER_NAME = "nvidia";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    NVD_BACKEND = "direct";
+    
+    # Для стриминга и порталов
+    NGX_DISABLE_IMAGE_SHARING = "1";
+    XDG_CURRENT_DESKTOP = "niri";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    GBM_BACKEND = "nvidia-drm";
+    WLR_RENDERER = "vulkan";
 
-  
-  # Wayland backends
-  QT_QPA_PLATFORM = "wayland;xcb";
-  GDK_BACKEND = "wayland,x11";
-  SDL_VIDEODRIVER = "wayland";
-  CLUTTER_BACKEND = "wayland";
+    # Wayland backends
+    QT_QPA_PLATFORM = "wayland;xcb";
+    GDK_BACKEND = "wayland,x11";
+    SDL_VIDEODRIVER = "wayland";
+    CLUTTER_BACKEND = "wayland";
 
-  # Фикс черного экрана в OBS Studio на Wayland + Nvidia
-  OBS_USE_EGL = "1";
+    # Фикс черного экрана в OBS Studio на Wayland + Nvidia
+    OBS_USE_EGL = "1";
 
-  # Отключаем G-Sync/VRR, так как они могут вызывать мерцание при захвате
-  __GL_GSYNC_ALLOWED = "0";
-  __GL_VRR_ALLOWED = "0";
-  __GL_MaxFramesAllowed = "1";
-};
+    # Отключаем G-Sync/VRR, так как они могут вызывать мерцание при захвате
+    __GL_GSYNC_ALLOWED = "0";
+    __GL_VRR_ALLOWED = "0";
+    __GL_MaxFramesAllowed = "1";
+  };
 
   # Параметры ядра для Nvidia
   boot.kernelParams = [
-    "nvidia-drm.modeset=1"
     "nvidia-drm.fbdev=1"
   ];
 
@@ -60,7 +59,7 @@ environment.sessionVariables = {
 environment.etc."nvidia/nvidia-application-profiles-rc.d/50-niri.json".text = builtins.toJSON {
   rules = [
     {
-      pattern = { feature = "procname"; matches = "niri|mango"; };
+      pattern = { feature = "procname"; matches = "niri"; };
       profile = "Limit Free Buffer Pool On Wayland Compositors";
     }
   ];

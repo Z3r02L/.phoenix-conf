@@ -24,10 +24,6 @@
     stylix.url = "github:danth/stylix";
 
     # Software
-    mangowm = {
-      url = "github:mangowm/mango";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     quickshell = {
       url = "github:outfoxxed/quickshell";
@@ -67,7 +63,6 @@
     # Software
     zapret-discord-youtube.url = "github:kartavkun/zapret-discord-youtube";
     helium.url = "github:schembriaiden/helium-browser-nix-flake";
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
     xremap-nix.url = "github:xremap/nix-flake";
   };
 

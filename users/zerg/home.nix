@@ -2,10 +2,10 @@
 
 let
   # Переключатель: true = живые конфиги (для редактирования), false = замороженные (в Nix Store)
-  isDev = true; 
+  isDev = true;
 
   dotfilesAbs = "${config.home.homeDirectory}/.phoenix-conf/dotfiles";
-  
+
   # Умная функция для папок
   smartLink = folder: 
     if isDev 
@@ -73,12 +73,6 @@ in
       obsidian
       anki
 
-      # VPN and networking
-      amnezia-vpn v2rayn
-      zapret
-      cloudflare-warp
-      cloudflared
-
       # Media
       qbittorrent syncthing
       audacity kdePackages.kdenlive obs-studio yt-dlp ffmpeg-full
@@ -141,12 +135,6 @@ in
   programs.kitty.enable = true;
   programs.fuzzel.enable = true;
 
-
-  # programs.starship = {
-  #   enable = true;
-  #   enableFishIntegration = true;
-  # };
-
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;
@@ -155,7 +143,6 @@ in
   # Синхронизация конфигов из директории dotfiles (Live-editing через smartLink)
   xdg.configFile = {
     "niri/config.kdl".source = smartLinkFile "niri/config.kdl";
-    "mango".source = smartLink "mango";
     "noctalia".source = smartLink "noctalia";
     "starship.toml".source = smartLinkFile "starship/starship.toml";
     "kitty/kitty.conf".source = lib.mkForce (smartLinkFile "kitty/kitty.conf");

@@ -22,6 +22,7 @@
     device = "/dev/disk/by-uuid/90ae5ce4-dd6e-44d2-8af8-0432173ef710";
     allowDiscards = true;
     bypassWorkqueues = true;
+    preLVM = true;
   };
 
   fileSystems."/boot" =

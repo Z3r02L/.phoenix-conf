@@ -21,7 +21,8 @@
             "librewolf",
             "vesktop",
             "alacritty",
-            "zed"
+            "zed",
+            "antigravity"
         ],
         "position": "center",
         "screenshotAnnotationTool": "",
@@ -122,7 +123,7 @@
                     "hideMode": "hidden",
                     "hideWhenIdle": false,
                     "id": "MediaMini",
-                    "maxWidth": 350,
+                    "maxWidth": 150,
                     "panelShowAlbumArt": true,
                     "scrollingMode": "hover",
                     "showAlbumArt": true,
@@ -165,40 +166,9 @@
                     "showBadge": true,
                     "showLabelsOnlyWhenOccupied": true,
                     "unfocusedIconsOpacity": 1
-                },
-                {
-                    "colorizeIcons": false,
-                    "hideMode": "transparent",
-                    "id": "ActiveWindow",
-                    "maxWidth": 150,
-                    "scrollingMode": "hover",
-                    "showIcon": true,
-                    "showText": true,
-                    "textColor": "none",
-                    "useFixedWidth": false
-                },
-                {
-                    "colorizeIcons": false,
-                    "hideMode": "visible",
-                    "iconScale": 0.8,
-                    "id": "Taskbar",
-                    "maxTaskbarWidth": 40,
-                    "onlyActiveWorkspaces": true,
-                    "onlySameOutput": true,
-                    "showPinnedApps": true,
-                    "showTitle": false,
-                    "smartWidth": true,
-                    "titleWidth": 120
                 }
             ],
             "right": [
-                {
-                    "defaultSettings": {
-                        "monitorOrder": [
-                        ]
-                    },
-                    "id": "plugin:mangowc-layout-switcher"
-                },
                 {
                     "displayMode": "onhover",
                     "iconColor": "none",
@@ -559,8 +529,8 @@
         "autoLocate": false,
         "firstDayOfWeek": -1,
         "hideWeatherCityName": true,
-        "hideWeatherTimezone": false,
-        "name": "Krasnodar",
+        "hideWeatherTimezone": true,
+        "name": "Pashkovsky",
         "showCalendarEvents": true,
         "showCalendarWeather": true,
         "showWeekNumberInCalendar": false,
