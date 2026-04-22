@@ -31,10 +31,12 @@
 
   # Modern CLI
   cat = "bat";
+  rg = "ripgrep-all";
   grep = "rg";
   ll = "eza -l --icons --group-directories-first --git";
   ls = "eza --icons --group-directories-first";
   lt = "eza --tree --icons --group-directories-first";
+  t = "btop";
   top = "btop";
   v = "nvim";
   zed = "zeditor";

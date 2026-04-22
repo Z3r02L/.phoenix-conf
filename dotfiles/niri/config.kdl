@@ -267,7 +267,7 @@ binds {
     Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
-
+    
     Mod+Alt+R hotkey-overlay-title="Restart Shell: Noctalia" { spawn "sh" "-c" "pkill noctalia; noctalia-shell &"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.

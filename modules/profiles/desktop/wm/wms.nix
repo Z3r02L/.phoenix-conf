@@ -61,6 +61,9 @@
         # apps like Vesktop can discover org.freedesktop.portal.ScreenCast.
         "org.freedesktop.portal.Screencast" = [ "gnome" ];
         "org.freedesktop.portal.Screenshot" = [ "gnome" ];
+        # Handy relies on the GlobalShortcuts portal for push-to-talk hotkeys
+        # such as Ctrl+Space under Wayland.
+        "org.freedesktop.portal.GlobalShortcuts" = [ "gnome" ];
         default = lib.mkForce [ "gtk" ];
       };
     };

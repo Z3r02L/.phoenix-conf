@@ -16,7 +16,6 @@ in
     llm-agents.rtk               # Экономия токенов
 
     # CLI-клиенты (npm-based — всегда собираются локально):
-    llm-agents.qwen-code
     llm-agents.gemini-cli
     # llm-agents.kilocode-cli
     llm-agents.code
