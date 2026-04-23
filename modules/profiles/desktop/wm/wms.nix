@@ -12,20 +12,6 @@
     options = "grp:lalt_lshift_toggle"; # укажите свою комбинацию
   };
   
-  fonts.fontconfig = {
-    enable = true;
-    antialias = true;
-    hinting = {
-      enable = true;
-      style = "slight"; # "slight" обычно лучше всего для современных шрифтов
-    };
-    subpixel = {
-      rgba = "rgb";
-      lcdfilter = "default";
-    };
-  };
-
-
   environment.systemPackages = with pkgs; [
 
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default

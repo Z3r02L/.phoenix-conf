@@ -31,8 +31,8 @@
 
   # Modern CLI
   cat = "bat";
-  rg = "ripgrep-all";
-  grep = "rg";
+  rg = "rga";
+  grep = "rga";
   ll = "eza -l --icons --group-directories-first --git";
   ls = "eza --icons --group-directories-first";
   lt = "eza --tree --icons --group-directories-first";
@@ -47,4 +47,6 @@
   mkdir = "mkdir -p";
   mv = "mv -iv";
   path = "echo $PATH | tr ':' '\n'";
+
+  tks ="tmux kill-server";
 }

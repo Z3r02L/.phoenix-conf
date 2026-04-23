@@ -296,7 +296,7 @@ in {
     };
     subpixel = {
       rgba = "rgb"; # Оптимально для ЖК-мониторов
-      lcdfilter = "default";
+      lcdfilter = "light";
     };
     # Указываем системе приоритетные шрифты для подмены
     defaultFonts = {
