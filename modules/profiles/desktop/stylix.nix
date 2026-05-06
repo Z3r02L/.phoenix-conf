@@ -46,6 +46,6 @@
     };
 
     targets.grub.enable = false;
-    targets.nixos-icons.enable = true;
+    # targets.nixos-icons.enable = true; # Only works on NixOS
   };
 }

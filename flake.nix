@@ -41,12 +41,6 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    dankMaterialShell = {
-      url = "github:AvengeMedia/DankMaterialShell";
-      inputs.nixpkgs.follows = "nixpkgs";
-      # inputs.dgop.follows = "dgop";
-    };
-
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -78,6 +72,20 @@
           zerg = import ./hosts/zerg/default.nix { inherit inputs self; };
           l2   = import ./hosts/l2/default.nix   { inherit inputs self; };
           s1   = import ./hosts/s1/default.nix   { inherit inputs self; };
+        };
+
+        homeConfigurations = {
+          "zerg" = home-manager.lib.homeManagerConfiguration {
+            pkgs = nixpkgs.legacyPackages."x86_64-linux";
+            extraSpecialArgs = { inherit inputs self; };
+            modules = [
+              ./users/zerg/home.nix
+              ./modules/profiles/desktop/stylix.nix
+              inputs.stylix.homeManagerModules.stylix
+              inputs.sops-nix.homeManagerModules.sops
+              # Можно добавить другие модули, если нужно
+            ];
+          };
         };
       };
     };

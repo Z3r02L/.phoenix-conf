@@ -32,8 +32,9 @@ in
   imports = [
     ./mpv.nix
     ./fish.nix
-    inputs.dankMaterialShell.homeModules.default
   ];
+  home.username = "zerg";
+  home.homeDirectory = "/home/zerg";
   home.stateVersion = "25.05";
   # GTK theming is handled by Stylix
 
@@ -115,7 +116,14 @@ in
 
   # ── Синхронизация конфигов из директории dotfiles (Live-editing через smartLink) ──
   xdg.configFile."yazi".source = smartLink "yazi";
+  xdg.configFile."nvim".source = smartLink "nvim";
   home.file.".tmux.conf".source = smartLinkFile "tmux/tmux.conf";
+  xdg.configFile."Code/User/settings.json".source = smartLinkFile "vscode/settings.json";
+  xdg.configFile."Code/User/keybindings.json".source = smartLinkFile "vscode/keybindings.json";
+  xdg.configFile."Code/User/mcp.json".source = smartLinkFile "vscode/mcp.json";
+  xdg.configFile."zed/settings.json".source = smartLinkFile "zed/settings.json";
+  xdg.configFile."zed/keymap.json".source = smartLinkFile "zed/keymap.json";
+  xdg.configFile."Antigravity/User/settings.json".source = smartLinkFile "antigravity/settings.json";
 
   # Vesktop configuration (One Folder Plan)
   xdg.configFile."vesktop/settings.json".source = smartLinkFile "vesktop/settings.json";
@@ -125,15 +133,17 @@ in
 
   # Принудительная запись (overwrite)
   xdg.configFile."vesktop/settings.json".force = true;
+  xdg.configFile."nvim".force = true;
+  xdg.configFile."Code/User/settings.json".force = true;
+  xdg.configFile."Code/User/keybindings.json".force = true;
+  xdg.configFile."Code/User/mcp.json".force = true;
+  xdg.configFile."zed/settings.json".force = true;
+  xdg.configFile."zed/keymap.json".force = true;
+  xdg.configFile."Antigravity/User/settings.json".force = true;
   home.file.".local/share/applications/vesktop.desktop".force = true;
   home.file.".local/share/applications/vesktop-wayland.desktop".force = true;
   home.file.".pi/agent/settings.json".force = true;
   home.file.".tmux.conf".force = true;
-
-  programs.dank-material-shell = {
-    enable = true;
-  };
-
 
   # GTK Icon Theme configuration
   gtk = {

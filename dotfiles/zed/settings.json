@@ -7,8 +7,15 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "format_on_save": "off",
+  "base_keymap": "VSCode",
+  "vim_mode": false,
+  "helix_mode": false,
   "tab_size": 2,
   "autosave": "on_focus_change",
+  "toolbar": {
+    "breadcrumbs": true
+  },
   "language_models": {
     "openai_compatible": {
       "z.ai": {
@@ -32,35 +39,74 @@
     }
   },
   "agent": {
+    "profiles": {
+      "pnpm-+-vue-js": {
+        "name": "PNPM + VueJS",
+        "tools": {},
+        "enable_all_context_servers": false,
+        "context_servers": {}
+      }
+    },
     "play_sound_when_agent_done": true,
-    "default_profile": "ask",
+    "default_profile": "write",
     "default_model": {
       "provider": "google",
-      "model": "gemini-2.5-flash"
+      "model": "gemini-3-flash-preview"
     }
   },
   "agent_servers": {
-    "your_agent_1": {
-      "command": "path_to_executable",
-      "args": [],
-      "env": {}
-    },
-    "qwen-code": {
-      "command": "path_to_executable",
-      "args": [],
+    "Qwen Code": {
+      "type": "custom",
+      "command": "qwen",
+      "args": [
+        "--experimental-acp"
+      ],
       "env": {}
     }
   },
   "context_servers": {
+    "browsermcp": {
+      "enabled": true,
+      "command": "npx",
+      "args": [
+        "@browsermcp/mcp@latest"
+      ],
+      "env": {}
+    },
+    "chrome-devtools-mcp-zed": {
+      "enabled": true,
+      "settings": {
+        "browser_url": null,
+        "ws_endpoint": null,
+        "ws_headers": null,
+        "auto_connect": null,
+        "channel": null,
+        "headless": null,
+        "isolated": null,
+        "user_data_dir": null,
+        "viewport": null,
+        "executable_path": null,
+        "chrome_arg": [],
+        "proxy_server": null,
+        "accept_insecure_certs": null,
+        "category_emulation": null,
+        "category_performance": null,
+        "category_network": null,
+        "log_file": null,
+        "extra_args": []
+      }
+    },
+    "browser-tools-context-server": {
+      "enabled": true,
+      "settings": {}
+    },
     "mcp-server-vercel": {
-      "source": "extension",
       "enabled": true,
       "settings": {
         "url": "https://your-mcp-server.vercel.app/api/mcp"
       }
     },
     "mcp-server-supabase": {
-      "source": "extension",
       "enabled": false,
       "settings": {
         "supabase_access_token": "YOUR_TOKEN",
@@ -68,7 +114,6 @@
       }
     },
     "mcp-server-context7": {
-      "source": "extension",
       "enabled": true,
       "settings": {
         "default_minimum_tokens": "10000"
@@ -88,60 +133,33 @@
     //     "get-library-docs"
     //   ]
     // },
-    "Framelink Figma MCP": {
-      "source": "custom",
-      "command": "npx",
-      "args": [
-        "-y",
-        "figma-developer-mcp",
-        "--figma-api-key=figd_3ScjxLTkEwFF4SBoLNUPsLUXm96wx3gTIPGkYoNu",
-        "--stdio"
-      ],
-      "alwaysAllow": ["get_figma_data", "download_figma_images"]
-    },
+    // Secret-backed context servers such as Figma, Linear, or custom
+    // OpenAI/Milvus integrations are intentionally omitted here so the file
+    // is safe to keep in dotfiles and symlink for live editing.
     "shadcn": {
-      "source": "custom",
       "command": "npx",
       "args": ["shadcn@latest", "mcp"]
     },
     "nx-mcp": {
-      "source": "custom",
       "command": "npx",
       "args": ["nx-mcp@latest"]
     },
     "sequential-thinking": {
-      "source": "custom",
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
-    },
-    "claude-context": {
-      "source": "custom",
-      "command": "npx",
-      "args": ["@zilliz/claude-context-mcp@latest"],
-      "env": {
-        "OPENAI_API_KEY": "your-openai-api-key",
-        "MILVUS_ADDRESS": "your-zilliz-cloud-public-endpoint",
-        "MILVUS_TOKEN": "your-zilliz-cloud-api-key"
-      }
-    },
-    "linear": {
-      "source": "custom",
-      "command": "npx",
-      "args": ["-y", "@tacticlaunch/mcp-linear"],
-      "env": {
-        "LINEAR_API_TOKEN": "<YOUR_TOKEN>"
-      }
     }
   },
   "icon_theme": "VSCode Icons for Zed (Dark)",
   "ui_font_size": 16,
   "buffer_font_size": 16,
-  "theme": {
-    "mode": "system",
-    "light": "Gruvbox Dark Hard",
-    "dark": "One Dark"
-  },
+  "theme": "Ayu Dark",
   "languages": {
+    "Go": {
+      "language_servers": ["gopls"]
+    },
+    "TypeScript": {
+      "language_servers": ["typescript-language-server"]
+    },
     "Nix": {
       "language_servers": ["nixd", "!nil"],
       "formatter": {

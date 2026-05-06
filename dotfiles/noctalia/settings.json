@@ -295,7 +295,7 @@
     "brightness": {
         "backlightDeviceMappings": [
         ],
-        "brightnessStep": 5,
+        "brightnessStep": 3,
         "enableDdcSupport": false,
         "enforceMinimum": true
     },
@@ -552,12 +552,12 @@
     },
     "nightLight": {
         "autoSchedule": true,
-        "dayTemp": "6500",
-        "enabled": false,
+        "dayTemp": "5600",
+        "enabled": true,
         "forced": false,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
-        "nightTemp": "4000"
+        "nightTemp": "3900"
     },
     "noctaliaPerformance": {
         "disableDesktopWidgets": true,

@@ -19,7 +19,7 @@
   gs = "git status";
 
   # Nix & System
-  ncg = "nix-collect-garbage -d";
+  ncg = "nh clean all --keep 3 --optimise --dry";
   nd = "nix develop";
   nfu = "nix flake update";
   nhl = "nh os switch -n .";

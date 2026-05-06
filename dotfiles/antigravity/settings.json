@@ -1,0 +1,30 @@
+{
+  "chat.tools.global.autoApprove": true,
+  "chat.tools.terminal.enableAutoApprove": true,
+  "chat.tools.terminal.autoApprove": true,
+  "chat.tools.edits.autoApprove": true,
+  "chat.agent.maxRequests": 100,
+  "chat.agent.autoApprove": true,
+  "chat.tools.autoApprove": true,
+  "geminicodeassist.autoAcceptToolUse": true,
+  "kilo-code.debug": false,
+  "kilo-code.allowedCommands": [
+    "git log",
+    "git diff",
+    "git show"
+  ],
+  "kilo-code.deniedCommands": [],
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "terminal.integrated.commandsToSkipShell": [
+    "kilo-code.new.agentManagerOpen",
+    "kilo-code.new.agentManager.showTerminal"
+  ],
+  "kilo-code.new.autocomplete.enableAutoTrigger": false,
+  "editor.fontSize": 16,
+  "editor.lineHeight": 24,
+  "editor.fontFamily": "'jetbrains', 'monospace', monospace",
+  "editor.smoothScrolling": true,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "workbench.list.smoothScrolling": true,
+  "git.autofetch": true
+}
