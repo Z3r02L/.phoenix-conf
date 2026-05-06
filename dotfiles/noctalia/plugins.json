@@ -16,7 +16,8 @@
             "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
         },
         "mangowc-layout-switcher": {
-            "enabled": false
+            "enabled": false,
+            "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
         },
         "niri-animation-picker": {
             "enabled": true,
